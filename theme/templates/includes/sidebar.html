@@ -1,0 +1,73 @@
+          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="{{ SITEURL }}">Home</a></li>
+              <!--<li><a href="{{ SITEURL }}/categories">Categories</a></li>-->
+              <!--<li><a href="{{ SITEURL }}/archives">Archives</a></li>-->
+              <li><a href="{{ SITEURL }}/tags">Tags</a></li>
+            {% if MENUITEMS %}
+              {% for name, uri in MENUITEMS %}
+              <li><a href="{{ uri|format(SITEURL)}}">{{ name }}</a></li>
+              {% endfor %}
+            {% endif %}
+            {% if DISPLAY_PAGES_ON_MENU %}
+              {% for p in PAGES %}
+              <li><a href="{{ SITEURL}}/pages/{{ p.slug }}"{% if p == page %} class="active"{% endif %}>{{ p.title }}</a></li>
+              {% endfor %}
+              <li><a href="{{ SITEURL }}/pages/about-me">About Me</a></li>
+              <li><a href="{{ SITEURL }}/contact">Contact Me</a></li>
+            {% endif %}
+            </ul>
+          </nav>
+        </li>
+
+          {% if categories %}
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+            {% for cat, null in categories %}
+              <li{%- if cat == category %} class="active"{% endif -%}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name|title }}</a></li>
+            {% endfor %}
+            </ul>
+          </nav>
+          </li>
+          {% endif %}
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+            {% if FEED_ATOM %}
+              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}">ATOM Feed</a></li>
+            {% endif %}
+            {% if FEED_RSS %}
+              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}">RSS Feed</a></li>
+            {% endif %}
+            {% if category %}
+              <li><a href="{{ SITEURL }}/{{ category }}/rss.xml">{{ category.name|title }} (rss)</a></li>
+            {% endif %}
+            {% if SOCIAL %}
+              {% for name, url in SOCIAL %}
+              <li><a href="{{ url }}">{{ name }}</a></li>
+              {% endfor %}
+            {% endif %}
+            {% if LINKS %}
+              {% for name, url in LINKS %}
+              <li><a href="{{ url }}">{{ name }}</a></li>
+              {% endfor %}
+            {% endif %}
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+            <form id="search" method="get" action="/search">
+              <input type="text" name="q" size="12" maxlength="120" />
+              <br /><input type="submit" value="Search" />
+            </form>
+          </nav>
+          </li>
+          </ul>

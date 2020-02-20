@@ -1,0 +1,6 @@
+cache/*
+output/*
+*.pyc
+
+# local-only
+_vomit/*

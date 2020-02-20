@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block headers %}
+  {{ super() }}
+{% endblock %}
+
+{% block title %}Site Search - {{ super() }}{% endblock %}
+
+{%- block content %}{% raw %}
+{% block content %}
+{% endblock content %}
+{% endraw %}{% endblock content -%}

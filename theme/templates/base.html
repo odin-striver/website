@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ article.lang if article and article.lang else DEFAULT_LANG }}">
+  <head>
+  {% block headers %}
+    <meta name="description" content="{% block metadesc %}Michael Lustfield's Blog{% endblock %}" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
+    <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="{{ SITEURL }}/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="{{ SITEURL }}/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} - Atom Feed" href="{{ SITEURL }}/{{ FEED_ATOM }}" /> 
+    {% if FEED_RSS %}
+    <link rel ="alternate" type="application/rss+xml" title="{{ SITENAME }} - RSS Feed" href="{{ SITEURL }}/{{ FEED_RSS }}" />
+    {% endif %}
+    {% if GOOGLE_ANALYTICS %}
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+    {% endif %}
+  {% endblock headers %}
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">
+          {%- include "includes/sidebar.html" -%}
+        </div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <{%- if article %}article class="post" {% else %}section {% endif -%}id="page-main" role="main">
+{% block content %}
+{% endblock content %}
+      </{%- if article %}article{% else %}section{% endif -%}> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      {% if FOOTER %}
+      <div id="page-foot">
+        <p>{{ FOOTER }}</p>
+      </div>
+      {% endif %}
+    </div> <!-- /#page -->
+    {% if GOOGLE_ANALYTICS %}
+    <script type="text/javascript">var _gaq = _gaq || [];_gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS }}']);{% if GOOGLE_ANALYTICS_DOMAIN %}_gaq.push(['_setDomainName', '{{ GOOGLE_ANALYTICS_DOMAIN }}']);{% endif %}_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = '/theme/js/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();</script>
+    {% endif %}
+  </body>
+</html>

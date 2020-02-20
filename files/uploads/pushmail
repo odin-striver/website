@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Parameters
+working="$HOME/.synmail/"
+offmap="$working/offlineimap.conf"
+rcfile="$working/$1-getm"
+procfile="$working/$1-proc"
+
+# Test for config files
+if [[ ! -e "$rcfile" ]]; then
+	echo "Unknown getmailrc configuration file"
+	exit
+fi
+
+if [[ ! -e "$procfile" ]]; then
+	echo "Unknown procmail configuration file"
+	exit
+fi
+
+# Perform IMAP sync - prevents conflicts (I hope)
+offlineimap -c "$offmap"
+
+# Retrieve new messages
+getmail -r "$rcfile" -g "$working"
+
+##NOTE: procmail configuration is called by getmail config
+
+# Wait for procmail to do anything else (not really needed)
+sleep 2
+
+# Do our final IMAP sync
+offlineimap -c "$offmap"
+
+# Keep things locked up
+chmod -R 0700 $HOME/.synmail
+
+exit
