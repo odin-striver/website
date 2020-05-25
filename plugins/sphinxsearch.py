@@ -45,12 +45,10 @@ class sphinxsearch_xml_generator(object):
         else:
             page_category = page.category.name
 
+        # Massage data
         page_url = self.siteurl + '/' + page.url
-
         page_time = getattr(page, 'date', datetime(1970, 1, 1, 1, 0)).strftime('%s')
-
-        # There may be possible collisions, but it's the best I can think of.
-        page_index = abs(zlib.crc32((page_time + page_url).encode('utf-8')))
+        page_index = abs(zlib.crc32((page.save_as).encode('utf-8')))
 
         return {'title':  page_title,
                 'author': page.author,
