@@ -14,7 +14,7 @@ TYPOGRIFY = False
 THEME = './theme'
 
 FEED_RSS = 'rss.xml'
-CATEGORY_FEED_RSS = '%s/rss.xml'
+CATEGORY_FEED_RSS = '{slug}/rss.xml'
 CATEGORY_FEED_ATOM = None
 
 PAGE_URL = 'pages/{slug}'
