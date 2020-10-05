@@ -174,19 +174,10 @@ check out this resource before consulting other resources.
 My server is a Linode VPS. I use their smallest plan because I can't peg
 the resources it offers.
 
-My advertisement... In the past I've used Linode as my VPS provider of choice
-but I've found that they're really nothing special and a bit overpriced. My VPS
-provider of choice has become `Linode`_. It's more than powerful enough
-for running this blog, multiple irssi sessions, and my development environment.
-If you use the link provided you will notice it has my referral code. I get a
-little gift from them, you get it too if you sign up and someone uses your
-referral code. When I say excellent support- I mean it. I accidentally deleted
-my virtual disk, and these guys grabbed it from the grave for me. I screwed
-up with recreating a node, these guys spent hours repairing my mistake.
-
-Note: A recent change in `Linode`_ means you get a $10 credit for signing
-up with my referral code. Use it for free. If you like it, I get credits. If you
-don't, you're out nothing. :)
+My advertisement... My VPS provider of choice has become `Linode`_. The smallest
+option is more than powerful enough for running this blog, multiple irssi
+sessions, and my development environment. If you use my referral link and remain
+an active customer, I get a small bonus.
 
 Attachments:
 
