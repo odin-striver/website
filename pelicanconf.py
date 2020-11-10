@@ -22,12 +22,13 @@ CATEGORY_URL = 'category/{slug}'
 ARTICLE_URL = '{category}/{slug}'
 ARTICLE_SAVE_AS = '{category}/{slug}.html'
 
-GOOGLE_ANALYTICS = 'UA-23569016-1'
-GOOGLE_ANALYTICS_DOMAIN = 'lustfield.net'
+GOOGLE_ANALYTICS = '252297868'
 
-PLUGINS = ['sitemap', 'gzip_cache', 'sphinxsearch']
+STATIC_PATHS = ['CNAME', 'files']
+
+#PLUGINS = ['sitemap', 'gzip_cache', 'sphinxsearch']
 PLUGIN_PATHS = ['./plugins']
-TEMPLATE_PAGES = {'search_base.html': 'search_base.html'}
+#TEMPLATE_PAGES = {'search_base.html': 'search_base.html'}
 SITEMAP = {
     'format': 'xml',
     'priorities': {
@@ -37,7 +38,7 @@ SITEMAP = {
     },
     'changefreqs': {
         'articles': 'monthly',
-        'indexes': 'daily',
+        'indexes': 'weekly',
         'pages': 'monthly'
     }
 }

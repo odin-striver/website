@@ -17,7 +17,7 @@
               <li><a href="{{ SITEURL}}/pages/{{ p.slug }}"{% if p == page %} class="active"{% endif %}>{{ p.title }}</a></li>
               {% endfor %}
               <li><a href="{{ SITEURL }}/pages/about-me">About Me</a></li>
-              <li><a href="{{ SITEURL }}/contact">Contact Me</a></li>
+              <li><a href="{{ SITEURL }}/pages/contact-me">Contact Me</a></li>
             {% endif %}
             </ul>
           </nav>
@@ -64,9 +64,11 @@
           <li class="side-navigation-li">
           <nav>
             <h3>Search</h3>
-            <form id="search" method="get" action="/search">
-              <input type="text" name="q" size="12" maxlength="120" />
-              <br /><input type="submit" value="Search" />
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
             </form>
           </nav>
           </li>
