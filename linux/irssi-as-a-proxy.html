@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Using Irssi as an IRC proxy" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Irssi As A Proxy - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="irc" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/irssi-as-a-proxy" title="Permalink «Irssi As A Proxy»">Irssi As A Proxy</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2008-12-30T19:13:00-06:00">Tue 30 December 2008</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/irc.html">irc</a>-->        </div>
+      </header>
+        <p>Irssi has a fairly nice proxy feature. It's probably the best proxy I've
+ever used. Unfortunately, it has a few flaws and is very under
+documented.</p>
+<p>I gave up on ever having a decent proxy and switched to the screen
+option but I still want to explain this feature so it's decently
+documented somewhere.</p>
+<p>To setup the server you need to first install irssi and screen. Edit
+your configuration the same as you normally would to connect to any
+other server.</p>
+<p>You want to proxy to load my default so edit ~/.irssi/startup and add
+the line &quot;/LOAD PROXY&quot;.</p>
+<p>You can either edit the configuration file yourself IF you know what
+you're doing or you can use the commands to do it. People seem to screw
+this up a lot so I won't show it. The irssi group seem to advise against
+as well.</p>
+<p>Set a password with</p>
+<pre class="literal-block">
+/SET irssiproxy_password PASSWORD
+</pre>
+<p>You need to set a different port for each network in the configuration.</p>
+<pre class="literal-block">
+/SET irssiproxy_ports Freenode=7001 Bitlbee=7002
+</pre>
+<p>You need to make sure to save the settings.</p>
+<pre class="literal-block">
+/SAVE ALL
+</pre>
+<p>Create a directory called scripts and then autorun underneath it.</p>
+<pre class="literal-block">
+mkdir -p ~/.irssi/scripts/autorun
+</pre>
+<p>Put the <a class="reference external" href="http://scripts.irssi.org/scripts/awayproxy.pl">awayproxy.pl</a> and <a class="reference external" href="http://wouter.coekaerts.be/irssi/scripts/proxy_backlog.pl">proxy_backlog.pl</a> scripts in the scripts
+directory. You want to make these run at launch time so just make a
+symlink to them in the autorun.</p>
+<pre class="literal-block">
+cd ~/.irssi/scripts/autorun
+ln -s ../awayproxy.pl
+ln -s ../proxy\_backlog.pl
+</pre>
+<p>Edit the awayproxy file. It's very well commented. The other file is a
+drop in tool. It's not pretty or elegant, but it fixes the fact that
+irssi proxy doesn't have a backlog viewer available.</p>
+<p>Now you need to setup a task to launch this on your server. We'll add
+this to the boot process. Edit /etc/rc.local</p>
+<p>Add this line replacing USER with your user name.</p>
+<pre class="literal-block">
+sudo -H -u USER screen -d -m -S irssi-proxy irssi
+</pre>
+<p>Breaking down the command</p>
+<pre class="literal-block">
+sudo ; runs command as user
+-H ; sets the home directory to the users
+-u ; sets the command to act as USER
+screen ; the command sudo is executing
+-d -m ; starts screen detached. This solves a lot of issues later.
+-S ; starts the screen session with the irssi-proxy ID.
+irssi ; the command we're launching
+</pre>
+<p>If you want to connect to this screen session from your server to see if
+the proxy connection is missing something - like PM's - just log in and
+do &quot;<tt class="docutils literal">screen <span class="pre">-r</span> <span class="pre">irssi-proxy</span></tt>&quot; That big long command that we did made it
+possible to only need that little line to connect.</p>
+<p>What did you say? You want to connect to it now? I'm afraid that's
+beyond the scope of this.... :P</p>
+<p>On your client. Create an alias command. I used</p>
+<pre class="literal-block">
+BL = &quot;CTCP -proxy- IRSSIPROXY BACKLOG SEND&quot;;
+</pre>
+<p>We need to create a network</p>
+<pre class="literal-block">
+/NETWORK ADD Proxy
+</pre>
+<p>Then add a server to it</p>
+<pre class="literal-block">
+/SERVER ADD -auto -network Proxy proxy.server.com 7001 PASSWORD
+</pre>
+<ul class="simple">
+<li>Remember that you have different ports for each proxy network</li>
+</ul>
+<p>Make sure to save the settings</p>
+<pre class="literal-block">
+/SAVE ALL
+</pre>
+<hr class="docutils" />
+<p>Hurray, all should be set up and well. Just run irssi on your local
+system and it should connect to the proxy.</p>
+<p>If it isn't working for you just comment a request for help or email me
+and I'll be glad to help you.</p>
+<p>If you need help I'd suggest finding some place other than their
+channel. It tends to be full of RTFM ass holes and pricks. Especially
+when you ask something they don't know the answer to. It's best to find
+another channel of people that use it and just ask there instead.</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/irc.html">irc</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

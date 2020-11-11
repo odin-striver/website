@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Set up a basic bazaar (bzr) server" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Creating Your Own Bazaar Server - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="bazaar, vcs" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/creating-your-own-bazaar-server" title="Permalink «Creating Your Own Bazaar Server»">Creating Your Own Bazaar Server</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2009-10-31T23:02:00-05:00">Sat 31 October 2009</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/bazaar.html">bazaar</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/vcs.html">vcs</a>-->        </div>
+      </header>
+        <p>By now we've all heard about the Bazaar (bzr) version control system. If
+you're a coder then you're well aware of what a version control system
+is and why it's helpful. If you code on Launchpad you're equally aware
+how incredibly awesome this system is.</p>
+<p>Rather than discuss how incredible bazaar is, I'd like to explain how to
+set up a production level deployment for a bzr server. If you're curious
+what makes bazaar great, just try it out. You can use
+<a class="reference external" href="https://staging.launchpad.net/">https://staging.launchpad.net/</a> to create branches for playing around.</p>
+<p>To deploy a low level and basic setup you only need to run this command
+on your server:</p>
+<p>sudo aptitude install openssh-server bzr</p>
+<p>That's really all there is to it. You can now push an existing code
+branch to your server using the following command:</p>
+<pre class="literal-block">
+bzr push bzr+ssh://yourserver.com/~/branch
+</pre>
+<p>That's only a basic deployment. What I like doing is having branches
+where multiple people can work on the same branch. This first thing I do
+is create a directory that this whole thing will be based in. I like to
+do this on its own partition for obvious reasons. For me this always
+exists at /bazaar. I then use the following:</p>
+<p># Get into the branch directory</p>
+<pre class="literal-block">
+cd /bazaar
+</pre>
+<p># Create a directory for branch content</p>
+<pre class="literal-block">
+mkdir bzr
+</pre>
+<p># Make a nice short directory name to this</p>
+<pre class="literal-block">
+cd /
+ln -s /bazaar/bzr
+</pre>
+<p>Now anyone with the right permissions (root) can push to the server
+using bzr push bzr+ssh://yourserver.com/bzr/branch. However, we
+don't want to give everyone root access. Instead of doing this, I issue
+the following:</p>
+<p># Create a generic bzr group</p>
+<pre class="literal-block">
+groupadd bzr
+</pre>
+<p># Assign group to branches</p>
+<pre class="literal-block">
+chown root:bzr /bazaar/bzr
+</pre>
+<p>Now anyone in the bzr group can push to this. However, we're working in
+teams of users. The user that makes the commit will be the only one that
+can manage this branch. I guess it's time to learn about the &quot;sticky
+bit.&quot; This little bit allows us to retain the group that owns the
+directory. The sticky bit doesn't seem to like retaining the owner but
+that becomes irrelevant because it's the groups we care about.</p>
+<p># Set generic permissions</p>
+<pre class="literal-block">
+chmod 770 /bazaar/bzr
+</pre>
+<p># Set the sticky bit</p>
+<pre class="literal-block">
+chmod +s /bazaar/bzr
+</pre>
+<p>Now it's time to give a user permission to work with these branches.</p>
+<pre class="literal-block">
+usermod -a -G bzr username
+</pre>
+<p>You should be ready to rock now. If you create a branch and decide that
+only a handful of users should be able to access it, this is easy.
+Something could be a highly secret piece of code that is the &quot;bread and
+butter&quot; to a massive project you are undertaking.</p>
+<p># Create new group</p>
+<pre class="literal-block">
+groupadd bzr-special
+</pre>
+<p># Set permissions on branch</p>
+<pre class="literal-block">
+chown -R root:bzr-special /bzr/branch
+</pre>
+<p># Add users to the special group</p>
+<pre class="literal-block">
+usermod -a -G bzr-special username
+</pre>
+<p>Heck Ya! That was easy enough wasn't it? It really is once you've gone
+through the hassle of picking out these little things. It's actually
+amazingly easy if you have a guide. I wasn't able to find this guide and
+I hope this will help others trying to do the same thing.</p>
+<p>What's next? I'd suggest pulling the loggerhead source and setting it
+up. This is a great tool for seeing revision changes. I'd like to see a
+way to send an email diff on branch changes but this may be too hard
+without created a chopped down version of Launchpad.</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/bazaar.html">bazaar</a> #<a href="https://michael.lustfield.net/tag/vcs.html">vcs</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

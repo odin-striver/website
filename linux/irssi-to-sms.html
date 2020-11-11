@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Send Irssi alerts to your phone as text messages" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Irssi to SMS - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="irc" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/irssi-to-sms" title="Permalink «Irssi to SMS»">Irssi to SMS</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2009-02-02T16:43:00-06:00">Mon 02 February 2009</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/irc.html">irc</a>-->        </div>
+      </header>
+        <p>It's no longer a secret that when I'm not in an active irssi session and
+you hilight me, that I get a text message. By popular request, I'm
+writing up an explanation to it.</p>
+<p>1. Get irssi. When you're using it, you'll want to have it in a screen
+session so you can always stay online. I already wrote a guide about
+<a class="reference external" href="http://michael.lustfield.net/content/irssi-using-screen-and-ssh">Using irssi with screen and SSH</a>.</p>
+<p>2. Setup Scripts. Once you're doing this, you'll want to get
+<a class="reference external" href="http://scripts.irssi.org/scripts/screen_away.pl">screen_away.pl</a> and <a class="reference external" href="http://scripts.irssi.org/scripts/awayproxy.pl">awayproxy.pl</a>. I explained this in the
+previously mentioned guide as well.</p>
+<p>Descriptions from irssi.org:</p>
+<p>screen-away.pl - set (un)away, if screen is attached/detached</p>
+<p>awayproxy.pl - Sets nick away when client discconects from the.
+irssi-proxy. If away gathers messages targeted to nick and forwards .
+them to an email address.</p>
+<p>They are pretty basic to setup and the comments explain things very
+well. screen-away.pl is just a drop-in script. awayproxy.pl is one you
+will want to edit.</p>
+<p>3. Sprinkle in some magic. So you have these scripts working and you're
+getting emails about hilights you receive while away. What!? You don't
+have an expensive phone/contract to alert you? I don't either.</p>
+<p>What I do have is unlimited text messaging. Hurray, we're not doing the
+magic, someone else is.</p>
+<p><a class="reference external" href="http://www.livejournal.com/tools/textmessage.bml?mode=details">http://www.livejournal.com/tools/textmessage.bml?mode=details</a></p>
+<p>Example, if my number is 123-456-7890 and I'm a verizon customer, I
+would set my email to <a class="reference external" href="mailto:1234567890&#64;vtext.com">1234567890&#64;vtext.com</a>.</p>
+<p>It's all incredibly simple, but without going through and doing the
+research, it's a pain to put together. Have fun with this. :)</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/irc.html">irc</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

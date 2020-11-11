@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Boot from a near-fully encrypted disk" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Fully Encrypted Disk - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="linux, file systems, security" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/fully-encrypted-disk" title="Permalink «Fully Encrypted Disk»">Fully Encrypted Disk</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2019-07-03T00:00:00-05:00">Wed 03 July 2019</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/linux.html">linux</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/file-systems.html">file systems</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/security.html">security</a>-->        </div>
+      </header>
+        <p>An intelligent mind once said, &quot;if I can touch your system, then it's not your
+system.&quot; This phrase shaped the way I approached security, and increased my
+paranoia.</p>
+<p>Although many guides exist that describe full disk encryption, they
+unfortunately fall a bit short of the claim and leave a bit too much unencrypted
+data available to be tampered with. Fortunately, GRUB2 makes near-full disk
+encryption very easy, it just takes a few extra steps.</p>
+<div class="section" id="falling-short">
+<h2>Falling Short</h2>
+<p>The most common method of full(ish) disk encryption is &quot;Encrypted LVM.&quot; This
+approach, and many others, often use a separate /boot which is used to handle
+decryption.</p>
+<p>When /boot is left unencrypted and secureboot is disabled, an attacker (Evil
+Maid) is able to edit configuration files (grub.cfg), insert boot options, or
+replace an entire initrd/initramfs image with one containing malicious code.</p>
+<p>Depending on distro of choice, hardware, and BIOS, secureboot might be
+available. With secure boot, it can be possible to detect changes to initramfs,
+but this doesn't mean the boot process can't be manipulated via boot parameters
+or other methods.</p>
+<p>Although it's currently imposible to encrypt the MBR, everything else can be
+encrypted pretty easily. This guide is all about using a single encrypted
+partitions filling the entire disk.</p>
+</div>
+<div class="section" id="installation-with-encryption">
+<h2>Installation With Encryption</h2>
+<p>The process provided here is based on the Debian installer. From the boot menu,
+choose &quot;Advanced options&quot; and then &quot;Expert installation.&quot; Despite the name,
+this installation method is quite easy, it just provides more flexibility.</p>
+<p>This process requires GRUB and generates an MBR that is too large to fit in the
+standard 512 byte space. Newer partioning tools usually leave a large space
+before the first partition to accomodate this problem, however, this is largely
+dependent on the installer. It is much safer to follow a manual partitioning
+process.</p>
+<p>To manually configure the partition table:</p>
+<ul>
+<li><p class="first">Follow the installer through the standard steps</p>
+</li>
+<li><p class="first">During &quot;Load installer components from CD&quot;, select &quot;parted-udeb&quot;</p>
+</li>
+<li><p class="first">Stop after &quot;Detect disks&quot; completes</p>
+</li>
+<li><p class="first">Switch to a terminal session (Alt+F2)</p>
+</li>
+<li><p class="first">Use parted to generate the partition table:</p>
+<pre class="literal-block">
+parted -a optimal /dev/sda # or your relevant disk
+mklabel msdos
+mkpart primary 10M 100%
+quit
+</pre>
+</li>
+<li><p class="first">Switch back to the installer (Alt+F1 or Alt+F7 for graphical)</p>
+</li>
+</ul>
+<p>Once partitioned, the remaining steps will take place from the installer:</p>
+<ul class="simple">
+<li>Continue to &quot;Partition disks&quot;</li>
+<li>Choose the &quot;Manual&quot; partitioning option</li>
+<li>If prompted for &quot;Force UEFI installation,&quot; choose &quot;No&quot; [1]</li>
+<li>Select the previously created partition</li>
+<li>Change 'Use as' to 'physical volume for encryption'</li>
+<li>Make any other changes you want and select &quot;Done [...]&quot;</li>
+<li>Select 'Configure encrypted volumes'</li>
+<li>Select 'Create encrypted volumes,' select the crypto disk, and finish</li>
+<li>Select the newly created disk (probably sda1_crypt)</li>
+<li>Change 'Use as' to 'physical volume for LVM'</li>
+<li>Select 'Configure the Logical Volume Manager'</li>
+<li>Create a volume group, some volumes, finish, and configure those volumes</li>
+</ul>
+<p>[1] This usually means the installer was started in EFI-mode.</p>
+<p>The final result should look similar to this:</p>
+<p><img alt="luks_partition" src="/files/uploads/luks_partition.jpg" /></p>
+<p>Newer versions of cryptsetup will generate encrypted volumes using Version 2
+headers. These headers are not currently supported by GRUB and need to be
+downgraded.</p>
+<p>After the step: &quot;Install the GRUB boot loader on a hard disk&quot;:</p>
+<ul>
+<li><p class="first">Go to the console (Alt+F2)</p>
+</li>
+<li><p class="first">Downgrade the LUKS Header:</p>
+<pre class="literal-block">
+cryptsetup luksDump /dev/sda1 | grep ^V
+# If &quot;Version: 1,&quot; then skip the remainder of this step
+
+cryptsetup luksChangeKey --key-slot 0 --pbkdf pbkdf2 /dev/sda1
+# Enter the LUKS passphrase three times
+cryptsetup convert --type luks1 /dev/sda1
+</pre>
+</li>
+</ul>
+<p>In addition to downgrading the header, GRUB's MBR needs some extra modules:</p>
+<ul>
+<li><p class="first">Start chroot:</p>
+<pre class="literal-block">
+mount -t proc none /target/proc
+mount -t sysfs none /target/sys
+mount -o rbind /run /target/run
+chroot /target /bin/bash
+</pre>
+</li>
+<li><p class="first">Edit grub config (vi /etc/default/grub) and append:</p>
+<pre class="literal-block">
+GRUB_ENABLE_CRYPTODISK=&quot;y&quot;
+GRUB_RELOAD_MODULES=&quot;lvm cryptodisk&quot;
+</pre>
+</li>
+<li><p class="first">Re-run the GRUB installation step:</p>
+<pre class="literal-block">
+update-grub
+grub-install --recheck /dev/sda
+</pre>
+</li>
+</ul>
+<p>Although not related to disk encryption, this is an excellent opportunity to
+remove the insanity that SystemD brings with it.</p>
+<ul>
+<li><p class="first">From inside the chroot, swap the init system:</p>
+<pre class="literal-block">
+apt install sysvinit-core
+apt purge systemd
+rm -rf /usr/lib/systemd
+</pre>
+</li>
+<li><p class="first">Switch back to the installer (Alt+F1)</p>
+</li>
+<li><p class="first">Finish the installation</p>
+</li>
+</ul>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting</h2>
+<p>For reasons I have not yet been able to identify, GRUB installation rarely works
+with this configuration the first time through. If the newly installed system
+can't be booted because the MBR can't be found or because &quot;error: disk
+'lvmid/xyz' not found,&quot; run these steps to fix the problem.</p>
+<ul class="simple">
+<li>Boot back into the installer</li>
+<li>Select &quot;Advanced options&quot; -&gt; &quot;Rescue mode&quot;</li>
+<li>Once prompted, provide the LUKS passphrase and mount the root disk</li>
+<li>Switch to a terminal (Alt+F2)</li>
+<li>Manually mount extra partitions</li>
+<li>Return to rescue screen (Alt+F1)</li>
+<li>From &quot;Rescue operations,&quot; select &quot;Execute a shell in [...]root</li>
+<li>Select &quot;Reinstall GRUB boot loader&quot;</li>
+<li>Select &quot;Reboot the system&quot;</li>
+</ul>
+</div>
+<div class="section" id="decryption-during-boot">
+<h2>Decryption During Boot</h2>
+<p>During boot, the disk will need to be unlocked twice. The first decryption will
+make /boot available for grub to boot from. The second will be used to mount the
+root file system and boot. It's important to note that the first password will be
+entered using the hardware's default keyboard layout; the second will be entered
+using the OS-configured keyboard layout.</p>
+<p>It's possible to embed a decryption key into initramfs so that the key only
+needs to be entered once, but this has significant security implications and is
+strongly discouraged. This setup is explained in good detail in Step 4 (Avoiding
+the extra password prompt) on a <a class="reference external" href="https://cryptsetup-team.pages.debian.net/cryptsetup/encrypted-boot.html">Debian cryptsetup</a> page.</p>
+</div>
+<div class="section" id="better-security">
+<h2>Better Security</h2>
+<p>When GRUB supports LUKSv2, the key will be able to be stored entirely within the
+kernel, which will prevent a lot of potential security problems. Once this
+becomes available, it will be worth migrating to.</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/linux.html">linux</a> #<a href="https://michael.lustfield.net/tag/file-systems.html">file systems</a> #<a href="https://michael.lustfield.net/tag/security.html">security</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

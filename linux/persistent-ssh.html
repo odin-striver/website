@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Ensuring work isn&#39;t lost when an ssh session disconnects" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Persistent SSH - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="ssh" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/persistent-ssh" title="Permalink «Persistent SSH»">Persistent SSH</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2010-08-11T22:19:00-05:00">Wed 11 August 2010</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/ssh.html">ssh</a>-->        </div>
+      </header>
+        <p>It's time for another post. Recently I've had issues with dropping
+network connections or wanting to connect and keep working on the same
+thing from other systems. Most of you probably already know the answer.
+You screen.</p>
+<p>Sounds easy enough. My issue is that I'm incredibly lazy. I don't want
+to SSH into the system AND start screen AND detach AND reattach. That's
+just asking way too much of someone like me.</p>
+<p>Here's the very simple solution. In my ~/.bashrc file I appended this
+section of code.</p>
+<pre class="literal-block">
+ssh() {command ssh &quot;$1&quot; -Xt screen -aAdr -RR work bash}
+</pre>
+<p>This makes a function called SSH. Bash always uses a function over a
+command if the two collide. So running ssh will call this function
+instead of calling the command(app) /usr/bin/ssh. If you want to not use
+the function</p>
+<p>but use SSH you have two options. The first option is call the function
+something else. Either s(), sshw(), or something_else().</p>
+<p>Recursion can happen. The &quot;command&quot; command is a BASH built-in function
+if I recall correctly. This command breaks the function calls so it will
+call /usr/bin/ssh (found from $PATH) rather than ssh(). Simple enough
+to understand but not so easy to explain. I hope I did OK with that.</p>
+<p>The next part of this is the $1. This is the first parameter passed to
+the ssh command. Example being &quot;ssh foo.com&quot; will insert foo.com in
+place of $1.</p>
+<p>The rest of this is pretty simple. You establish the SSH connection and
+call screen. If screen is running an instance named work it will attach
+to that and boot the other connection. If the instance isn't named
+doesn't exist</p>
+<p>then it gets created. Then &quot;bash&quot; following is just the command executed
+on the new instance. I have a similar command that has irssi at the end.</p>
+<p>While writing this I was thinking about the need for using ssh to
+connect to another server. Maybe you want to do something entirely
+different. The answer is pretty simple. The function is designed so you
+only pass one</p>
+<p>parameter to it. So any additional parameters means you're doing
+something different.</p>
+<p>To make it simple I just came up with this function instead.</p>
+<pre class="literal-block">
+ssh() {
+    if [[ &quot;$2&quot; == &quot;&quot; ]]; then
+        command ssh &quot;$1&quot; -Xt screen -aAdr -RR work bash
+    else
+        command ssh $&#64;
+    fi
+}
+</pre>
+<p>If you only pass the server you're connecting to into the ssh command,
+it will work with screen. If you pass it with more than one parameter it
+just runs /usr/bin/ssh with the parameters you used.</p>
+<p>It's so simple but putting the pieces together can be a bit of a pain
+the first time. I hope this will help someone else that may have a
+similar use case.</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/ssh.html">ssh</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

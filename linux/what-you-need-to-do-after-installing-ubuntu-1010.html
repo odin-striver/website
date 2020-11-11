@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="A quick little ramble about installing ubuntu" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>What You Need To Do After Installing Ubuntu 10.10 - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="linux, overkill" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/what-you-need-to-do-after-installing-ubuntu-1010" title="Permalink «What You Need To Do After Installing Ubuntu 10.10»">What You Need To Do After Installing Ubuntu 10.10</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2010-10-03T02:32:00-05:00">Sun 03 October 2010</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/linux.html">linux</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/overkill.html">overkill</a>-->        </div>
+      </header>
+        <p>Every six months these articles become popular. I've been using Ubuntu
+10.10 (Maverick Meerkat) for a few months now and I thought I'd share
+what I thought.</p>
+<div class="section" id="for-most-users">
+<h2>For most users</h2>
+<p><strong>Step 1:</strong></p>
+<p>Install Ubuntu 10.10</p>
+<p><strong>Step 2:</strong></p>
+<p>Install the little extras you might want, such as Thunderbird, Galeon,
+etc.</p>
+<p><strong>Step 3:</strong></p>
+<p>Enjoy!</p>
+</div>
+<div class="section" id="for-cli-users">
+<h2>For cli users</h2>
+<p><strong>Step 3:</strong></p>
+<pre class="literal-block">
+apt-get install aptitude
+aptitude purge vim-tiny
+aptitude install vim
+</pre>
+<p><strong>Step 4:</strong></p>
+<p>Enjoy!</p>
+</div>
+<div class="section" id="for-psychotic-users-like-me">
+<h2>For psychotic users like me</h2>
+<p><strong>Step 1:</strong></p>
+<p>Grab Alternate CD</p>
+<p>Install &quot;Command Line&quot; system</p>
+<p><strong>Step 2:</strong></p>
+<p>Strip the crap out of it - bare essential packages only!</p>
+<p><strong>Step 3:</strong></p>
+<p>TOO MANY PACKAGES! Get them out.</p>
+<p>No, you don't need that, prove to me you can't boot or network without
+it..</p>
+<p><strong>Step 4:</strong></p>
+<p>Get rid of vim-tiny; bring in vim and aptitude.</p>
+<p><strong>Step 5:</strong></p>
+<p>Tell aptitude not to bring in suggested/recommended packages.</p>
+<p>Now just install the bare minimum system you need</p>
+<p><strong>Step 6:</strong></p>
+<p>Create a chroot; hop into it.</p>
+<p>Install what you need for compiling things.</p>
+<p><strong>Step 7:</strong></p>
+<p>Grab the kernel source, trim down until there's almost nothing there.</p>
+<p>Install that kernel to your system and remove all the other kernel
+stuff.</p>
+<p>I like monolithic because now I have no need for copying modules.</p>
+<p>I also trimmed it to the point where I don't need initramfs/initrd.</p>
+<p><strong>Step 8:</strong></p>
+<p>Looks good? Now trim it some more.</p>
+<p><strong>Step 9:</strong></p>
+<p>Tweak the crap out of openbox and anything else you need.</p>
+<p><strong>Step 10:</strong></p>
+<p>Enjoy!</p>
+<p>Just for the heck of it, I decided to post my .config. I usually get
+asked for it when I mention a stripped down kernel.</p>
+<p>Attachments:</p>
+<p><img alt="image0" src="/files/icons/application-octet-stream.png" /> <a class="reference external" href="/files/uploads/kernel.config">kernel.config</a></p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/linux.html">linux</a> #<a href="https://michael.lustfield.net/tag/overkill.html">overkill</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Obtaining a perfect ssllabs score" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Getting a Perfect SSL Labs Score - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="nginx, ssl, ssllabs, tls" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/nginx/rss.xml">Nginx (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/nginx/getting-a-perfect-ssl-labs-score" title="Permalink «Getting a Perfect SSL Labs Score»">Getting a Perfect SSL Labs Score</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2015-01-19T16:45:00-06:00">Mon 19 January 2015</time>
+            in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/nginx.html">nginx</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/ssl.html">ssl</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/ssllabs.html">ssllabs</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/tls.html">tls</a>-->        </div>
+      </header>
+        <p><img alt="ssllabs_100.png" src="/files/uploads/ssllabs_100.png" style="width: 100%;" /></p>
+<p>Running web servers is both fun and infuriating. We get to do some really neat
+and fun things, sure. We also have an ever changing battlefield. When we sleep,
+the other guys are wide awake. Keeping a web server secure is tough.</p>
+<p>Just one of the many battles in this war is SSL. If you have a website that
+either provides or accepts private data, you /should/ already know that SSL is
+not an option, it's a requirement. I say should because that's proven to not be
+an obvious fact.</p>
+<p>If you're on this page, then you know that you need or want SSL and are looking
+for the best configuration settings. Congratulations, I already like you better.</p>
+<p>Obviously, I'll only be discussing Nginx since it's the only real web server. ;)</p>
+<div class="section" id="certificate">
+<h2>Certificate</h2>
+<p>This section is easy to get 100% on.</p>
+<ul class="simple">
+<li>Make sure your cert and chain are in the correct order.</li>
+<li>Don't use SHA1 (use SHA256) for the signature algorithm.</li>
+<li>Use a well known/trusted CA.</li>
+</ul>
+<p>SSL Labs is pretty good about being descriptive about any issues here.</p>
+</div>
+<div class="section" id="protocol-support">
+<h2>Protocol Support</h2>
+<p>The best place to start with securing your website is protocol support. It's a
+given that you shouldn't be using SSLv2. It should also be a given that you
+should no longer be using SSLv3. The recent POODLE vulnerability pretty much put
+the final knife in it.</p>
+<p>This means you should only support the TLS protocols.</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_protocols</span> <span class="s">TLSv1</span> <span class="s">TLSv1.1</span> <span class="s">TLSv1.2</span><span class="p">;</span>
+</pre></div>
+<p>This is reasonably secure. However, we want a &quot;perfect&quot; score. This will give
+you a score of 95. Disabling TLSv1.0 gives you a 97. Disabling TLSv1.1 gives you
+that last bit to 100.</p>
+<p>So, if you want a perfect score, you'll use this.</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_protocols</span> <span class="s">TLSv1.2</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="key-exchange">
+<h2>Key Exchange</h2>
+<p>By default, Nginx will use the default DHE (Ephemeral Diffie-Hellman) paramaters
+provided by openssl. This uses a weak key that gets lower scores. The best thing
+to do is build your own. You can create a 2048 bit key, but let's go ahead and
+toss 4096 at it.</p>
+<p>First, you need to build the file. I'm going to assume you keep SSL files in
+/etc/nginx/ssl.</p>
+<pre class="literal-block">
+openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096
+</pre>
+<p>Then in your Nginx configuration, you'll need this.</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_dhparam</span> <span class="s">ssl/dhparam.pem</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="cipher-strength">
+<h2>Cipher Strength</h2>
+<p>This one especially is ever changing. What's best today, may not be so hot
+tomorrow. Here, you'll have a battle between high security and compatibility.
+Keeping with the topic of this post, we care about security only.</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_ciphers</span> <span class="s">AES256+EECDH:AES256+EDH:!aNULL</span><span class="p">;</span>
+<span class="k">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="ssl-stapling">
+<h2>SSL Stapling</h2>
+<p>SSL Stapling doesn't exactly make you any more secure, but it does help the
+client significantly. In short, you help the client by telling them they can
+use your server for OCSP information for your domain instead of letting the
+browser make the request to an often unreliable resource.</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_stapling</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_stapling_verify</span> <span class="no">on</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="ssl-sessions">
+<h2>SSL Sessions</h2>
+<p>Maintaining SSL Sessions is definitely a good thing for everyone if you expect
+the user to be on your website for more than a single page view. These are
+rather trivial settings.</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
+<span class="k">ssl_session_timeout</span> <span class="mi">10m</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="extra-ssl-ecdh-curve">
+<h2>Extra: ssl_ecdh_curve</h2>
+<p>It turns out, some openssl implementations don't provide a nice default for nginx
+to inherit, so it becomes a good idea to specify this manually. (Thanks James
+from Penn State)</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_ecdh_curve</span> <span class="s">secp384r1</span><span class="p">;</span>
+</pre></div>
+<p>It has been suggested x25519 is a more secure but slightly less compatible option.</p>
+</div>
+<div class="section" id="http-headers">
+<h2>HTTP Headers</h2>
+<p>We'll also want to add a few headers.</p>
+<div class="highlight"><pre><span></span><span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&quot;max-age=31536000</span><span class="p">;</span> <span class="k">includeSubdomains&quot;</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">DENY</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">nosniff</span><span class="p">;</span>
+</pre></div>
+<p>They don't help you're score, but they're quite helpful.</p>
+</div>
+<div class="section" id="gzip">
+<h2>Gzip</h2>
+<p>Some attacks are possible because of gzip being enabled on SSL requests. In
+most cases, the best action is to simply disable gzip for SSL requests.</p>
+<p>SSL Blocks:</p>
+<div class="highlight"><pre><span></span><span class="k">gzip</span> <span class="no">off</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="putting-it-together">
+<h2>Putting it Together</h2>
+<p>The command to run:</p>
+<pre class="literal-block">
+openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096
+</pre>
+<p>The Nginx configuration:</p>
+<div class="highlight"><pre><span></span><span class="k">ssl_session_cache</span> <span class="s">shared:SSL:10m</span><span class="p">;</span>
+<span class="k">ssl_session_timeout</span> <span class="mi">10m</span><span class="p">;</span>
+<span class="k">ssl_protocols</span> <span class="s">TLSv1.2</span><span class="p">;</span>
+<span class="k">ssl_prefer_server_ciphers</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_ciphers</span> <span class="s">AES256+EECDH:AES256+EDH:!aNULL</span><span class="p">;</span>
+<span class="k">ssl_stapling</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_stapling_verify</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_dhparam</span> <span class="s">ssl/dhparam.pem</span><span class="p">;</span>
+<span class="k">ssl_ecdh_curve</span> <span class="s">secp384r1</span><span class="p">;</span>
+
+<span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&quot;max-age=31536000</span><span class="p">;</span> <span class="k">includeSubdomains&quot;</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">DENY</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">nosniff</span><span class="p">;</span>
+</pre></div>
+<p>In any server block listening for SSL:</p>
+<div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
+    <span class="c1"># gzip should not be used with ssl</span>
+    <span class="kn">gzip</span> <span class="no">off</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>It's not hard once you know the super-duper magic sauce. Just remember that you
+are sacrificing compatibility for the sake of security. Enjoy!</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/nginx.html">nginx</a> #<a href="https://michael.lustfield.net/tag/ssl.html">ssl</a> #<a href="https://michael.lustfield.net/tag/ssllabs.html">ssllabs</a> #<a href="https://michael.lustfield.net/tag/tls.html">tls</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

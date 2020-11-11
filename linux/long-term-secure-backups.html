@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="How to build a low cost and secure backup solution" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Long Term Secure Backups - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="infrastructure, backups, linux, security" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/long-term-secure-backups" title="Permalink «Long Term Secure Backups»">Long Term Secure Backups</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2016-05-28T00:00:00-05:00">Sat 28 May 2016</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/infrastructure.html">infrastructure</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/backups.html">backups</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/linux.html">linux</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/security.html">security</a>-->        </div>
+      </header>
+        <p>Not that long ago, I managed to delete all of my physical HV hosts, backup
+server, all external backups, and a bit more. The first question that most
+people would ask would probably be how that's even possible. That may become
+a post by itself; it probably won't, though. What really matters is how I can
+keep this from ever happening again?</p>
+<p>I sat down for some time to come up with some requirements, some ideas, and
+eventually rolled out a backup solution that I feel confident with.</p>
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+<p>To build this backup solution, I first needed to define a set of requirements.</p>
+<ul class="simple">
+<li>No server can see backups from other servers</li>
+<li>The backup server can not access other servers</li>
+<li>The backup server must create versioned backups (historical archives)</li>
+<li>No server can access its own historical archive</li>
+<li>All archives must be uploaded to an off-site location</li>
+<li>All off-site backups must enforce data retention</li>
+<li>The backup server must be unable to delete backups from an off-site location</li>
+<li>All off-site backups must be retained for a minimum of three months</li>
+<li>The backup server must keep two years worth of historical archives</li>
+<li>The entire solution must be fully automated</li>
+<li>Low budget</li>
+<li>Can't impact quality of service</li>
+</ul>
+<p>Some of these may sound like common sense, but most backup tools, including the
+big dollar options, don't meet all of them. In some (way too many) cases, the
+backup server is given access to root (or administrator) on most systems.</p>
+</div>
+<div class="section" id="the-stack">
+<h2>The Stack</h2>
+<p>Deciding how this stack should be contructed was definitely the most time
+consuming part of this project. I'm going to attempt to lay out what I built
+in the order of the direction data flows. Wish me luck!</p>
+<div class="section" id="server-to-backup-server">
+<h3>Server to Backup Server</h3>
+<p>The obvious choice is SSH. It's a standard, reasonably secure, and very easy.</p>
+<p>When people do backups with SSH, the typical decision is to have the backup
+server initiate and control backups, which almost always means the backup server
+has the ability to log into other servers. This makes your backup server a
+substantially higher value target for an attacker. Yes, it's horrible if any
+system gets compromised, but this minimizes the impact and aids in recovery.</p>
+</div>
+<div class="section" id="scheduling">
+<h3>Scheduling</h3>
+<p>Every server has a backup script that runs on a pseudo-random schedule. Because
+the node name will always be the same and checksums are worthless unless they
+produce the same value every time, I was able to use the node name to build the
+backup schedule.</p>
+<p>This boils down to what is essentially:</p>
+<div class="highlight"><pre><span></span><span class="nt">snap</span><span class="p">:</span>
+  <span class="nt">cron.present</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">identifier</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">snap</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/usr/local/sbin/snap</span>
+    <span class="p p-Indicator">-</span> <span class="nt">hour</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2,10,18</span>
+    <span class="p p-Indicator">-</span> <span class="nt">minute</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">pillar</span><span class="o">[</span><span class="s1">&#39;backup_minute&#39;</span><span class="o">]</span> <span class="cp">}}</span>
+</pre></div>
+<p>The 'backup_minute' is created with ext_pillar. To build the entire ext_pillar
+is a task for the reader, what matters is:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zlib</span>
+<span class="k">return</span> <span class="n">zlib</span><span class="o">.</span><span class="n">crc32</span><span class="p">(</span><span class="n">grains</span><span class="p">[</span><span class="s1">&#39;hostname&#39;</span><span class="p">])</span> <span class="o">%</span> <span class="mi">60</span>
+</pre></div>
+<p>You may notice that using 60 doubles the chance a backup running on the top of
+the hour. You can feel free to choose 59, but I like nice round numbers that
+are easy to identify.</p>
+</div>
+<div class="section" id="ssh-keys">
+<h3>SSH Keys</h3>
+<p>I mentioned that I wanted something 100% automated. I'm a huge fan of Salt and
+use it in my home environment, so Salt was the only choice for the automation.</p>
+<p>A feature of Salt is the Salt Mine. The mine is a way for minions (every server)
+to report bits of data back to the salt master that can be shared with other
+systems. I utilized this feature to share root's SSH public key. I also used
+salt to generate that key if it doesn't already exist.</p>
+<p>Here's a mini-snippet for clarification:</p>
+<div class="highlight"><pre><span></span><span class="nt">root_sshkeygen</span><span class="p">:</span>
+  <span class="nt">cmd.run</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="s">&#39;ssh-keygen</span><span class="nv"> </span><span class="s">-f</span><span class="nv"> </span><span class="s">/root/.ssh/id_rsa</span><span class="nv"> </span><span class="s">-t</span><span class="nv"> </span><span class="s">rsa</span><span class="nv"> </span><span class="s">-N</span><span class="nv"> </span><span class="s">&quot;&quot;&#39;</span>
+    <span class="p p-Indicator">-</span> <span class="nt">unless</span><span class="p">:</span> <span class="s">&#39;test</span><span class="nv"> </span><span class="s">-f</span><span class="nv"> </span><span class="s">/root/.ssh/id_rsa.pub&#39;</span>
+
+<span class="nt">/etc/salt/minion.d/mine.conf</span><span class="p">:</span>
+  <span class="nt">file.managed</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">contents</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">mine_functions:</span>
+          <span class="no">ssh.user_keys:</span>
+            <span class="no">user: root</span>
+            <span class="no">prvfile: False</span>
+            <span class="no">pubfile: /root/.ssh/id_rsa.pub</span>
+</pre></div>
+<p>Overall, this is pretty simple, but amazingly effective.</p>
+</div>
+<div class="section" id="user-accounts">
+<h3>User Accounts</h3>
+<p>At this point, all of the servers are ready to back up their data. They just
+aren't able to yet because the backup server is sitting there empty with no user
+accounts.</p>
+<p>This part is surprisingly easy as well. I simply use salt to create a separate
+jailed home directory for every server in the environment. The salt master
+already has the public SSH keys for every server in addition to the servers
+hostname.</p>
+<p>To keep things simple, this example does not include jails.</p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">server</span><span class="o">,</span> <span class="nv">keys</span> <span class="k">in</span> <span class="nv">salt</span><span class="o">[</span><span class="s1">&#39;mine.get&#39;</span><span class="o">](</span><span class="s1">&#39;*&#39;</span><span class="o">,</span> <span class="s1">&#39;ssh.user_keys&#39;</span><span class="o">)</span><span class="nv">.items</span><span class="o">()</span> <span class="cp">%}</span>
+<span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span><span class="p p-Indicator">:</span>
+  <span class="nt">user.present</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span>
+    <span class="p p-Indicator">-</span> <span class="nt">createhome</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+  <span class="nt">ssh_auth.present</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">user</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span>
+    <span class="p p-Indicator">-</span> <span class="nt">names</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="cp">{{</span> <span class="nv">keys</span><span class="o">[</span><span class="s1">&#39;root&#39;</span><span class="o">][</span><span class="s1">&#39;id_rsa.pub&#39;</span><span class="o">]</span> <span class="cp">}}</span> <span class="p p-Indicator">]</span>
+
+<span class="c1"># Ensures the user directory is never readable by others</span>
+<span class="nt">/home/</span><span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span><span class="p">:</span>
+  <span class="nt">file.directory</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">user</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span>
+    <span class="p p-Indicator">-</span> <span class="nt">group</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span>
+    <span class="p p-Indicator">-</span> <span class="nt">mode</span><span class="p">:</span> <span class="s">&#39;0700&#39;</span>
+    <span class="p p-Indicator">-</span> <span class="nt">require</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">user</span><span class="p">:</span> <span class="cp">{{</span> <span class="nv">server</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+<p>This will get user accounts created on the backup server, add the SSH public
+key to the users trusted keychain, and force the users home directory to be set
+to 700 which prevents other users/groups from accessing the data.</p>
+</div>
+<div class="section" id="backup-archives">
+<h3>Backup Archives</h3>
+<p>Now that data is getting from all servers to the backup server, it's time to
+start having more than a single copy of the data. The best tool I could find for
+this job was rsnapshot. I simply point rsnapshot at /home (or /srv/jails) and
+keep data stored where the existing servers can't access it. This means no
+compromised server can destroy any previous backups.</p>
+<p>I broke some of my own rules and have rsnapshot also backing up my pfSense device
+as well as my Cisco switch configurations. I'll get a better solution in place
+for those, but that is it's own project.</p>
+</div>
+<div class="section" id="ice-ice-baby">
+<h3>Ice Ice Baby</h3>
+<p>At this point, we have a rather complete backup option that meets nearly
+everything I care about. So far, we're at $0.00 to build this solution.
+However, off-site backups haven't been included.</p>
+<p>Do you want to trust your buddy and arrange to share backups with each other?
+Hopefully the obvious answer to everyone is an emphatic NO.</p>
+<p>The only two reasonable options I found were AWS Glacier and Google Nearline.
+Because we're talking about data that you should never need to actually access,
+the two options are very comparable. Google Nearline advertises fastest time to
+first byte; however, the more you pull down, the slower your retrieval rate is.
+AWS Glacier advertises cheapest storage, but the faster you want your data, the
+more you get to pay.</p>
+<p>The important thing to remember is that you're dealing with an off-site backup.
+You are &quot;putting it on ice.&quot; If nothing ever breaks, the only time you will ever
+access this data is to verify your backup process.</p>
+<p>I wrote a relatively simple script that runs on a cron (2x/mo) that:</p>
+<ul class="simple">
+<li>Creates a squashfs image of the entire rsnapshot archive</li>
+<li>Encrypts the quashfs image with a public GPG key</li>
+<li>Uploads the encrypted image</li>
+</ul>
+<p>I created a GPG key pair for this single process, encrypted the private key with
+my personal key, moved multiple copies (including paper) to various locations,
+and removed the private key from the server.</p>
+</div>
+</div>
+<div class="section" id="wrapping-up">
+<h2>Wrapping Up</h2>
+<p>There are a <em>lot</em> of backup options that exist. I have concerns about nearly
+every option that exists, including most commercial/enterprise offerings. To
+have a backup solution that I considered reasonably secure, I had to spend a
+lot of time thinking through the process and researching many different tools.</p>
+<p>I very much hope that what I put here will prove useful to other people trying
+address similar concerns. As always, I'm more than eager to answer questions.</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/infrastructure.html">infrastructure</a> #<a href="https://michael.lustfield.net/tag/backups.html">backups</a> #<a href="https://michael.lustfield.net/tag/linux.html">linux</a> #<a href="https://michael.lustfield.net/tag/security.html">security</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

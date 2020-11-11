@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Upgrading to ext4 through an ssh connection" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Upgrading to 9.04 and Ext4 Remotely - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="file systems" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/upgrading-to-904-and-ext4-remotely" title="Permalink «Upgrading to 9.04 and Ext4 Remotely»">Upgrading to 9.04 and Ext4 Remotely</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2009-04-07T19:05:00-05:00">Tue 07 April 2009</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/file-systems.html">file systems</a>-->        </div>
+      </header>
+        <p>WARNING! Do Not do this to your systems. This is for informational
+purposes only. Do this in a virtual machine only. If you do this outside
+of a virtual machine, your computer will blow up and you will die.
+You've been warned.</p>
+<p>I did in fact do this over SSH which was not safe and not smart. That
+fact that I did it does not mean any intelligent or knowledgeable person
+should do so. In fact, they probably wouldn't consider it.</p>
+<p>Now, if you do decide to do this such thing without heeding my warning
+about your own death, then it's time to stop joking. DO NOT follow other
+guides. I've read many other guides and all of them left out at least
+one very important step. All of them left out one step listed on the
+Ubuntu website which renders your system unbootable if not done.</p>
+<p>First off, we'll do the more stable upgrade. If you want to use Ext4
+then you should be using Jaunty Jackalope (9.04). To get to Jaunty, we
+first want to update your system to ensure a smooth transition.</p>
+<p>sudo aptitude update &amp;&amp; sudo aptitude full-upgrade</p>
+<p>Now to upgrade to Jaunty.</p>
+<p>sudo do-release-upgrade -d</p>
+<p>Once this completes, reboot and you will be running the Beta version of
+Jaunty. Read that again, Beta, not officially released yet.
+(<a class="reference external" href="http://wordnetweb.princeton.edu/perl/webwn?s=beta">http://wordnetweb.princeton.edu/perl/webwn?s=beta</a> | second
+adjective)</p>
+<p>Now to upgrade from Ext3 to Ext4. Do not stop half way through the
+process and read this whole thing first before starting.</p>
+<p>To start, we'll do this to non-vital drives. This means not /home,
+/boot, or /. Anything else is game for the moment. Run 'mount | grep
+/dev/sd' to see what partitions you have mounted. Your output will look
+like this.</p>
+<pre class="literal-block">
+michael&#64;panther:~$ mount | grep /dev/sd
+/dev/sda5 on / type ext3 (rw,relatime,errors=remount-ro)
+/dev/sda1 on /boot type ext3 (rw,relatime)
+/dev/sda7 on /home type ext3 (rw,relatime)
+/dev/sda8 on /var/vbox type ext3 (rw,relatime)
+</pre>
+<p>According to what I stated and this list, I will only do /dev/sda8 for
+the moment. We first unmount the device.</p>
+<pre class="literal-block">
+sudo umount /dev/sda8
+</pre>
+<p>Now we'll set some flags on the device. Almost every guide you will see
+will set different flags and I'm sure this isn't the absolute best.
+However, I did grab these from a partition created as Ext4 from the
+Ubuntu install CD so I assume they're set for a combination of stability
+and performance.</p>
+<pre class="literal-block">
+sudo tune2fs -O has_journal,ext_attr,resize_inode,dir_index,filetype,needs_recovery,extent,flex_bg,sparse_super,large_file,huge_file,uninit_bg,dir_nlink,extra_isize /dev/sda8
+</pre>
+<p>As a side note, I've seen it where the
+ext_attr,resize_inode,needs_recovery options aren't supported. I
+haven't seen any issues with omitting these.</p>
+<p>Now that I set the options on this device, I need to run an fsck on the
+drive.</p>
+<pre class="literal-block">
+sudo fsck -pf /dev/sda8
+</pre>
+<p>The flags here:</p>
+<pre class="literal-block">
+f - forces the check even if the file system looks clean
+p - automatically fix (preen) the file system
+</pre>
+<p>Now we need to edit /etc/fstab to reflect the change.</p>
+<pre class="literal-block">
+sudo vim /etc/fstab
+
+### Find the line relating to the partition you changed
+
+# /var/vbox was on /dev/sda8 during installation
+
+UUID=3311b3e1-3cfa-48a9-8911-f3ac30bc0afb /var/vbox ext3 relatime 0 2
+
+### And change the ext3 to ext4
+
+UUID=3311b3e1-3cfa-48a9-8911-f3ac30bc0afb /var/vbox ext4 relatime 0 2
+
+Save/Close - :x
+</pre>
+<p>You should reboot at this point to make sure everything is working. If
+everything is going great, then it's time to move onto the rest of your
+partitions.</p>
+<p>Please note: this is where things get dangerous and your system could
+stop booting. It is generally recommended to not do this to the root or boot
+partitions.</p>
+<p>Now, we'll tune the next partitions. I did this on /dev/sda1, /dev/sda5,
+and /dev/sda7. Refer to the mount listing for a reference.</p>
+<pre class="literal-block">
+sudo tune2fs -O has_journal,ext_attr,resize_inode,dir_index,filetype,needs_recovery,extent,flex_bg,sparse_super,large_file,huge_file,uninit_bg,dir_nlink,extra_isize /dev/sda1
+</pre>
+<p>Edit /etc/fstab as stated above to reflect these changes.</p>
+<p>At this point, be nervous. This is a point that was missed in every
+other guide I read. You need to reinstall GRUB or it won't be able to
+read your partitions anymore. Make /dev/sda reflect your setup. More
+than likely, /dev/sda is what you want; unless you want your MBR on your
+second drive. You most likely don't want to install it to a partition.
+Remember, you're installing GRUB to the MBR, not creating files on your
+partition.</p>
+<pre class="literal-block">
+grub-install /dev/sda
+</pre>
+<p>This little command will bring your system from not being bootable to
+being great. I believe you get one reboot before this must be done. When
+you reboot, your system will do an fsck on these partitions and convert
+them to Ext4. At this point, the drives are still Ext3.</p>
+<p>Now that you've rebooted after installing GRUB to the MBR, do the
+grub-install command again and reboot again. It's a quick little thing
+that I've seen help systems.</p>
+<p>CONGRATULATIONS! If you're system is still running, then you now have
+the Ubuntu 9.04 running Ext4.</p>
+<p>Your existing files are not using extents however. Your old files will
+still behave like Ext3 files. New files will take the behavior of Ext4.
+This will change after you do a defragmentation of your Ext4 file
+systems. On-line defragmentation is not supported yet and is very
+unstable. So unstable that I'm not even considering trying it yet. Once
+Ubuntu officially supports it, I will indeed post something about it.</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/file-systems.html">file systems</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

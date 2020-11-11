@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Michael Lustfield - michael</title><link>https://michael.lustfield.net/</link><description></description><lastBuildDate>Wed, 03 Jul 2019 00:00:00 -0500</lastBuildDate><item><title>Fully Encrypted Disk</title><link>https://michael.lustfield.net/linux/fully-encrypted-disk</link><description>&lt;p&gt;An intelligent mind once said, &amp;quot;if I can touch your system, then it's not your
+system.&amp;quot; This phrase shaped the way I approached security, and increased my
+paranoia.&lt;/p&gt;
+&lt;p&gt;Although many guides exist that describe full disk encryption, they
+unfortunately fall a bit short of the claim and leave a bit …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 03 Jul 2019 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2019-07-03:/linux/fully-encrypted-disk</guid><category>linux</category><category>linux</category><category>file systems</category><category>security</category></item><item><title>Tips for Living with an Ostomy</title><link>https://michael.lustfield.net/rambling/tips-for-living-with-an-ostomy</link><description>&lt;p&gt;My experience with colorectal (adenocarcinoma, T3aN0M0 [Stage 2]) cancer officially
+began on the 9th of October in 2017. After 8 rounds of chemo and 27 rounds of
+radiation, I arrived at surgery. Unfortunately, I came out on the other side of
+surgery with a permanent colostomy. Learning to live with …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 17 Mar 2019 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2019-03-17:/rambling/tips-for-living-with-an-ostomy</guid><category>rambling</category><category>ostomy</category></item><item><title>Secure Password Vault Using Yubikey</title><link>https://michael.lustfield.net/linux/secure-password-vault-using-yubikey</link><description>&lt;p&gt;Up until recently, my passwords were stored in a rather precarious manner. For
+my birthday, I decided it would be a nice gift to myself to perform a complete
+password refresh. This involved taking inventory of every password there was
+any record or memory of and resetting it to unique …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 14 Feb 2017 00:00:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2017-02-14:/linux/secure-password-vault-using-yubikey</guid><category>linux</category><category>linux</category><category>security</category></item><item><title>Long Term Secure Backups</title><link>https://michael.lustfield.net/linux/long-term-secure-backups</link><description>&lt;p&gt;Not that long ago, I managed to delete all of my physical HV hosts, backup
+server, all external backups, and a bit more. The first question that most
+people would ask would probably be how that's even possible. That may become
+a post by itself; it probably won't, though. What …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 28 May 2016 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2016-05-28:/linux/long-term-secure-backups</guid><category>linux</category><category>infrastructure</category><category>backups</category><category>linux</category><category>security</category></item><item><title>Ground Up Infrastructure</title><link>https://michael.lustfield.net/misc/ground-up-infrastructure</link><description>&lt;p&gt;I've been working with a company that recently lost a very large amount of their
+infrastructure. Not only were servers lost, but also backups, application data,
+and much more. Unfortunately, I'm not at liberty to share too many details, but
+I am able to say that it was the situation …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 02 Jan 2016 00:00:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2016-01-02:/misc/ground-up-infrastructure</guid><category>misc</category><category>infrastructure</category><category>debian</category><category>networking</category><category>virtualization</category></item><item><title>Geo Point with Elasticsearch 2.x</title><link>https://michael.lustfield.net/misc/geo-point-with-elasticsearch-2x</link><description>&lt;p&gt;I was recently brought into an interesting project that deals with analyzing
+some exciting data. I have my preferred search solutions and hate java, but
+I had to bite my tongue and acknowledge an ELK stack is the best tool for this
+particular job.&lt;/p&gt;
+&lt;div class="section" id="elk-stack"&gt;
+&lt;h2&gt;ELK Stack&lt;/h2&gt;
+&lt;p&gt;An &amp;quot;ELK stack&amp;quot; refers …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 22 Dec 2015 00:00:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2015-12-22:/misc/geo-point-with-elasticsearch-2x</guid><category>misc</category><category>elasticsearch</category><category>kibana</category><category>logstash</category><category>geo</category></item><item><title>Getting a Perfect SSL Labs Score</title><link>https://michael.lustfield.net/nginx/getting-a-perfect-ssl-labs-score</link><description>&lt;p&gt;&lt;img alt="ssllabs_100.png" src="/files/uploads/ssllabs_100.png" style="width: 100%;" /&gt;&lt;/p&gt;
+&lt;p&gt;Running web servers is both fun and infuriating. We get to do some really neat
+and fun things, sure. We also have an ever changing battlefield. When we sleep,
+the other guys are wide awake. Keeping a web server secure is tough.&lt;/p&gt;
+&lt;p&gt;Just one of the many battles in this …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 19 Jan 2015 16:45:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2015-01-19:/nginx/getting-a-perfect-ssl-labs-score</guid><category>nginx</category><category>nginx</category><category>ssl</category><category>ssllabs</category><category>tls</category></item><item><title>Book Review - Nginx Module Extension</title><link>https://michael.lustfield.net/nginx/book-review-nginx-module-extension</link><description>&lt;p&gt;I apparently do enough work with Nginx that people keep asking me to review
+things. In this case, Packt asked me to review another book called &amp;quot;Nginx
+Module Extension.&amp;quot; Well, a decent module development book doesn't exist, so
+I'm rather excited to dive in!&lt;/p&gt;
+&lt;div class="section" id="while-reading"&gt;
+&lt;h2&gt;While Reading&lt;/h2&gt;
+&lt;p&gt;Instead of just a …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Fri, 14 Mar 2014 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2014-03-14:/nginx/book-review-nginx-module-extension</guid><category>nginx</category><category>nginx</category><category>packt</category><category>review</category></item><item><title>Blog With Pelican and Nginx</title><link>https://michael.lustfield.net/nginx/blog-with-pelican-and-nginx</link><description>&lt;p&gt;I used to be a big lover of Drupal as a blogging platform. It's incredibly easy
+and trivial to deploy a new site with it and it comes with everything needed to
+write a blog. It's also incredibly easy to extend and with little work the whole
+SEO buzz stuff …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Thu, 08 Aug 2013 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2013-08-08:/nginx/blog-with-pelican-and-nginx</guid><category>nginx</category><category>nginx</category><category>pelican</category><category>blog</category></item><item><title>Completely Automated ESXi Deployment</title><link>https://michael.lustfield.net/misc/completely-automated-esxi-deployment</link><description>&lt;p&gt;This post has to come with the disclaimer that 99.97% of ESXi deployments have
+&lt;em&gt;NO&lt;/em&gt; use for anything this complicated. For that 0.03% of us, ESXi can be one
+heck of a deployment nightmare. It doesn't have to be, though.&lt;/p&gt;
+&lt;div class="section" id="background-the-situation"&gt;
+&lt;h2&gt;Background: The Situation&lt;/h2&gt;
+&lt;p&gt;The company I work for …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Thu, 08 Aug 2013 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2013-08-08:/misc/completely-automated-esxi-deployment</guid><category>misc</category><category>vmware</category></item><item><title>Bottle + UWSGI + Nginx Quickstart</title><link>https://michael.lustfield.net/nginx/bottle-uwsgi-nginx-quickstart</link><description>&lt;p&gt;Nginx is pretty sweet, that's a rather obvious statement from me. There are
+already many nginx forks and contributions back to the original. I also happen
+to have quite a spot in my heart for &lt;a class="reference external" href="http://bottlepy.org/docs/dev/"&gt;Bottle&lt;/a&gt;. In my eyes, it's a framework
+that pretty much lets you forget you're working …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 06 Aug 2013 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2013-08-06:/nginx/bottle-uwsgi-nginx-quickstart</guid><category>nginx</category><category>bottle</category><category>nginx</category><category>uwsgi</category><category>python</category></item><item><title>Esoteric Programming</title><link>https://michael.lustfield.net/rambling/esoteric-programming</link><description>&lt;p&gt;How needlessly complicated can you make one thing?&lt;/p&gt;
+&lt;p&gt;From Wikipedia: &amp;quot;An esoteric programming language (sometimes shortened
+to esolang) is a programming language designed as a test of the
+boundaries of computer programming language design, as a proof of
+concept, or as a joke. There is usually no intention of the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 30 Jul 2011 04:38:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2011-07-30:/rambling/esoteric-programming</guid><category>rambling</category><category>bash</category><category>programming</category><category>overkill</category></item><item><title>Dummies Guide to Setting Up Nginx</title><link>https://michael.lustfield.net/nginx/dummies-guide-to-setting-up-nginx</link><description>&lt;p&gt;Nginx is one of those things that many people want to try but don't.
+Why? Because it's scary. Well... Nginx itself isn't scary, but all of
+the poor guides out there make it a nightmare. The first step in making
+Nginx work for you is to not follow 95% of …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 25 Jul 2011 02:41:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2011-07-25:/nginx/dummies-guide-to-setting-up-nginx</guid><category>nginx</category><category>nginx</category><category>administration</category></item><item><title>Mister Jones</title><link>https://michael.lustfield.net/rambling/mister-jones</link><description>&lt;p&gt;It's always great to have the latest and greatest gadget. That new
+netbook is so small and everyone else has it. The Droid does so many
+cool things, even SSH. I deserve to have all of this cool stuff.&lt;/p&gt;
+&lt;p&gt;I'm getting rather annoyed with this attitude. Sure, I really want …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 22 Dec 2010 06:24:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-12-22:/rambling/mister-jones</guid><category>rambling</category><category>money</category><category>rant</category></item><item><title>Patience</title><link>https://michael.lustfield.net/rambling/patience</link><description>&lt;p&gt;&amp;quot;See that no one repays another evil for evil.&amp;quot;&lt;/p&gt;
+&lt;p&gt;[ I Thessalonians 5:15 ]&lt;/p&gt;
+&lt;p&gt;This is so easy to understand. It just says that if someone does an evil
+act, don't react with yet more evil.&lt;/p&gt;
+&lt;p&gt;Let's break it down though. How often have you been angered in IRC, on
+the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 23 Nov 2010 08:36:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-11-23:/rambling/patience</guid><category>rambling</category><category>patience</category></item><item><title>Simple IP Echo</title><link>https://michael.lustfield.net/nginx/simple-ip-echo</link><description>&lt;p&gt;OK! We all know Nginx is amazing and extremely light. I've been having
+the need lately to quickly get the IP address of a location. There's
+&amp;quot;whatismyip.com&amp;quot; but that's an ugly bloat. Look at how much you download
+to just get a small string of numbers.&lt;/p&gt;
+&lt;p&gt;To get around …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 31 Oct 2010 09:18:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-10-31:/nginx/simple-ip-echo</guid><category>nginx</category><category>nginx</category></item><item><title>What You Need To Do After Installing Ubuntu 10.10</title><link>https://michael.lustfield.net/linux/what-you-need-to-do-after-installing-ubuntu-1010</link><description>&lt;p&gt;Every six months these articles become popular. I've been using Ubuntu
+10.10 (Maverick Meerkat) for a few months now and I thought I'd share
+what I thought.&lt;/p&gt;
+&lt;div class="section" id="for-most-users"&gt;
+&lt;h2&gt;For most users&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Install Ubuntu 10.10&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Install the little extras you might want, such as Thunderbird, Galeon …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 03 Oct 2010 02:32:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-10-03:/linux/what-you-need-to-do-after-installing-ubuntu-1010</guid><category>linux</category><category>linux</category><category>overkill</category></item><item><title>Useful F1 in Firefox</title><link>https://michael.lustfield.net/linux/useful-f1-in-firefox</link><description>&lt;p&gt;Do you ever use F1 to bring up help pages in Firefox? Do you find this
+feature useful? Do you like rhetorical questions?&lt;/p&gt;
+&lt;p&gt;Personally, I've never found this F1 function useful or helpful. The
+times I wanted some help from it I wasn't able to get the help I needed …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 13 Sep 2010 18:26:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-09-13:/linux/useful-f1-in-firefox</guid><category>linux</category><category>tips</category></item><item><title>Nginx Book Review</title><link>https://michael.lustfield.net/nginx/nginx-book-review</link><description>&lt;p&gt;Most anyone reading this already knows me. My name is Michael Lustfield.
+I'm running the servers of a starting web development company called
+Kalliki Software. We've been in business for a little while now. When we
+started we had an Apache Web server with less than one half a gigabyte …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Thu, 26 Aug 2010 15:42:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-08-26:/nginx/nginx-book-review</guid><category>nginx</category><category>nginx</category><category>reviews</category></item><item><title>Persistent SSH</title><link>https://michael.lustfield.net/linux/persistent-ssh</link><description>&lt;p&gt;It's time for another post. Recently I've had issues with dropping
+network connections or wanting to connect and keep working on the same
+thing from other systems. Most of you probably already know the answer.
+You screen.&lt;/p&gt;
+&lt;p&gt;Sounds easy enough. My issue is that I'm incredibly lazy. I don't want …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 11 Aug 2010 22:19:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-08-11:/linux/persistent-ssh</guid><category>linux</category><category>ssh</category></item><item><title>Securing Websites</title><link>https://michael.lustfield.net/nginx/securing-websites</link><description>&lt;p&gt;Building a secure setup is extremely hard. There's an old saying that's
+basically &amp;quot;build an idiot-proof system and the world will build a better
+idiot.&amp;quot; That works two ways. If you build a hacker-proof system then
+you'll find better hackers. Loosely defined use of the term hacker of
+course.&lt;/p&gt;
+&lt;p&gt;So …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 11 Aug 2010 22:19:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-08-11:/nginx/securing-websites</guid><category>nginx</category><category>websites</category><category>nginx</category><category>php</category><category>overkill</category></item><item><title>Jack of all trades, master of none</title><link>https://michael.lustfield.net/rambling/jack-of-all-trades-master-of-none</link><description>&lt;p&gt;&amp;quot;Jack of all trades, master of none&amp;quot; is a figure of speech used in
+reference to a generalist: a person that is competent with many skills
+but is not outstanding in any particular one. (Wikipedia)&lt;/p&gt;
+&lt;p&gt;It's a very easy to become this. When I was 15 I got my first …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 18 Jul 2010 06:28:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-07-18:/rambling/jack-of-all-trades-master-of-none</guid><category>rambling</category><category>management</category><category>rant</category></item><item><title>Light Weight Firefox Notes</title><link>https://michael.lustfield.net/linux/light-weight-firefox-notes</link><description>&lt;p&gt;Lately I've been cumulating a very large list of things I need to do.
+It's been getting harder and harder to keep track of what I need to do.
+If I make a nice simple text file and a command to open up vim with my
+notes then I wind …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 17 Jul 2010 22:55:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-07-17:/linux/light-weight-firefox-notes</guid><category>linux</category><category>kiss</category></item><item><title>Nginx vs. Apache</title><link>https://michael.lustfield.net/nginx/nginx-vs-apache</link><description>&lt;p&gt;warning: no proof reading and some rambling...&lt;/p&gt;
+&lt;p&gt;I recently made the change to Nginx from Apache. This change came with a
+severe lack of fun and enjoyment. The whole process was &amp;gt;150 hours.
+Painstaking. It should be pretty easy to move this to my production
+server, probably be much much …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 01 Mar 2010 05:37:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-03-01:/nginx/nginx-vs-apache</guid><category>nginx</category><category>nginx</category><category>apache</category><category>reviews</category></item><item><title>I Use Linux; Get It Right</title><link>https://michael.lustfield.net/rambling/i-use-linux-get-it-right</link><description>&lt;p&gt;WOW! I didn't expect this to be such a popular post. Honestly, I
+recognise this as a rant both now and before posting. I'm impressed by
+the number of people that were able to take a rant and make something
+nice out of it.&lt;/p&gt;
+&lt;p&gt;== Begin Opening ==&lt;/p&gt;
+&lt;p&gt;I ventured onto the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 05 Jan 2010 18:19:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-01-05:/rambling/i-use-linux-get-it-right</guid><category>rambling</category><category>linux</category><category>gnu</category><category>open source</category><category>rant</category><category>overkill</category></item><item><title>SSH Tab Complete</title><link>https://michael.lustfield.net/linux/ssh-tab-complete</link><description>&lt;p&gt;I manage many servers as well as pop into a few other systems now and
+then. I was getting somewhat irritated with typing out everything. A
+search on Google showed many results. It seemed the most common command
+to do this was this.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+complete -W &amp;quot;$(echo `cat ~/.ssh/known_hosts | cut …&lt;/pre&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 05 Dec 2009 21:12:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-12-05:/linux/ssh-tab-complete</guid><category>linux</category><category>ssh</category></item><item><title>Light Weight Ubuntu Kernel</title><link>https://michael.lustfield.net/linux/light-weight-ubuntu-kernel</link><description>&lt;p&gt;As a preliminary note: DO NOT follow anything in this and proceed to ask
+for help. If you follow this than consider yourself void of ANY support.
+Especially from the -kernel channel. They support and develop stock
+kernels, not your personal modifications.&lt;/p&gt;
+&lt;p&gt;Now.. In my quest for a fast boot …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Fri, 04 Dec 2009 17:36:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-12-04:/linux/light-weight-ubuntu-kernel</guid><category>linux</category><category>kiss</category><category>overkill</category></item><item><title>Creating Your Own Bazaar Server</title><link>https://michael.lustfield.net/linux/creating-your-own-bazaar-server</link><description>&lt;p&gt;By now we've all heard about the Bazaar (bzr) version control system. If
+you're a coder then you're well aware of what a version control system
+is and why it's helpful. If you code on Launchpad you're equally aware
+how incredibly awesome this system is.&lt;/p&gt;
+&lt;p&gt;Rather than discuss how incredible …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 31 Oct 2009 23:02:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-10-31:/linux/creating-your-own-bazaar-server</guid><category>linux</category><category>bazaar</category><category>vcs</category></item><item><title>64bit Java / Flash Deathroll</title><link>https://michael.lustfield.net/linux/64bit-java-flash-deathroll</link><description>&lt;p&gt;I think Linux users can safely agree that Flash and Java make web usage into a
+battle ground. Many of us choose to blame the issue on the distribution we use.
+When we favor our distribution too much we'll point fingers at Sun or Adobe. If
+we use the FOSS …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Thu, 10 Sep 2009 16:43:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-09-10:/linux/64bit-java-flash-deathroll</guid><category>linux</category><category>java</category><category>flash</category></item><item><title>Moving from personal mail server to Gmail</title><link>https://michael.lustfield.net/linux/moving-from-personal-mail-server-to-gmail</link><description>&lt;p&gt;I was hosting my own email server for about a year. I enjoyed the fact
+that I had full and complete control over the entire mail server. I
+enjoyed being able to fine tune everything to fit my needs exactly. I
+was doing this for about 1.5 years.&lt;/p&gt;
+&lt;p&gt;Unfortunately …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 09 Jun 2009 12:07:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-06-09:/linux/moving-from-personal-mail-server-to-gmail</guid><category>linux</category><category>email</category></item><item><title>Upgrading to 9.04 and Ext4 Remotely</title><link>https://michael.lustfield.net/linux/upgrading-to-904-and-ext4-remotely</link><description>&lt;p&gt;WARNING! Do Not do this to your systems. This is for informational
+purposes only. Do this in a virtual machine only. If you do this outside
+of a virtual machine, your computer will blow up and you will die.
+You've been warned.&lt;/p&gt;
+&lt;p&gt;I did in fact do this over SSH …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 07 Apr 2009 19:05:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-04-07:/linux/upgrading-to-904-and-ext4-remotely</guid><category>linux</category><category>file systems</category></item><item><title>Irssi to SMS</title><link>https://michael.lustfield.net/linux/irssi-to-sms</link><description>&lt;p&gt;It's no longer a secret that when I'm not in an active irssi session and
+you hilight me, that I get a text message. By popular request, I'm
+writing up an explanation to it.&lt;/p&gt;
+&lt;p&gt;1. Get irssi. When you're using it, you'll want to have it in a screen
+session …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 02 Feb 2009 16:43:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-02-02:/linux/irssi-to-sms</guid><category>linux</category><category>irc</category></item><item><title>Irssi Using Screen And SSH</title><link>https://michael.lustfield.net/linux/irssi-using-screen-and-ssh</link><description>&lt;p&gt;I know this concept sound simple. You SSH into a server and restore a
+screen session running irssi. However, I wouldn't be writing about it if
+I didn't have a way to make it more efficient.&lt;/p&gt;
+&lt;p&gt;I'll explain the benefits as we go along.&lt;/p&gt;
+&lt;p&gt;First we need to get you …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:14:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/irssi-using-screen-and-ssh</guid><category>linux</category><category>irc</category><category>ssh</category></item><item><title>Irssi As A Proxy</title><link>https://michael.lustfield.net/linux/irssi-as-a-proxy</link><description>&lt;p&gt;Irssi has a fairly nice proxy feature. It's probably the best proxy I've
+ever used. Unfortunately, it has a few flaws and is very under
+documented.&lt;/p&gt;
+&lt;p&gt;I gave up on ever having a decent proxy and switched to the screen
+option but I still want to explain this feature so …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:13:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/irssi-as-a-proxy</guid><category>linux</category><category>irc</category></item><item><title>Perfect Irssi and OpenBox Integration</title><link>https://michael.lustfield.net/linux/perfect-irssi-and-openbox-integration</link><description>&lt;p&gt;I think I achieved nearly the perfect Irssi + OpenBox.&lt;/p&gt;
+&lt;p&gt;There's four steps to my setup. Configuring gnome-terminal, alltray,
+irssi, and an image.&lt;/p&gt;
+&lt;p&gt;First of all, we need to set up irssi. If your'e reading this, I'm
+guessing you've already done this. I use murf. You can find themes at
+&lt;a class="reference external" href="http://irssi.org/themes"&gt;http …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/perfect-irssi-and-openbox-integration</guid><category>linux</category><category>irc</category><category>openbox</category></item><item><title>Worthless Backups</title><link>https://michael.lustfield.net/rambling/worthless-backups</link><description>&lt;p&gt;How good are your backups?&lt;/p&gt;
+&lt;p&gt;I thought mine were pretty dang good. I found out otherwise. I had the
+following two lines running nightly for my backups.&lt;/p&gt;
+&lt;p&gt;# Make MySQL backup&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+mysqldump -u root -p &amp;quot;$(/.sql.pwd)&amp;quot; --all-databases | gzip &amp;gt; /var/mysqldump/mysql-$(date +%F).gz
+&lt;/pre&gt;
+&lt;p&gt;# Delete old copies&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+find /var/mysqldump …&lt;/pre&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/rambling/worthless-backups</guid><category>rambling</category><category>mysql</category><category>backup</category><category>rant</category></item><item><title>Push POP to IMAP Folder</title><link>https://michael.lustfield.net/linux/push-pop-to-imap-folder</link><description>&lt;p&gt;This is for anybody with multiple email accounts that wants to
+consolidate. My solution here requires and number of POP email accounts
+and one IMAP account.&lt;/p&gt;
+&lt;p&gt;I don't even want to begin thinking about the time it took me to come up
+with this solution. Hopefully it can save somebody …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:10:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/push-pop-to-imap-folder</guid><category>linux</category><category>email</category></item><item><title>Power Friendly Memo Script</title><link>https://michael.lustfield.net/linux/power-friendly-memo-script</link><description>&lt;p&gt;I've been bragging recently about how many obstacles I've overcome with
+Linux as a whole. There's many things I've been doing to Ubuntu to make
+it extremely fast and flexible for my uses. I also happen to be one of
+those people that forgets absolutely everything.&lt;/p&gt;
+&lt;p&gt;I very frequently decide …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:08:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/power-friendly-memo-script</guid><category>linux</category><category>kiss</category></item></channel></rss>

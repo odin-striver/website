@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Setting up an elegant blog using pelican and nginx" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Blog With Pelican and Nginx - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="nginx, pelican, blog" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/nginx/rss.xml">Nginx (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/nginx/blog-with-pelican-and-nginx" title="Permalink «Blog With Pelican and Nginx»">Blog With Pelican and Nginx</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2013-08-08T00:00:00-05:00">Thu 08 August 2013</time>
+            in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/nginx.html">nginx</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/pelican.html">pelican</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/blog.html">blog</a>-->        </div>
+      </header>
+        <p>I used to be a big lover of Drupal as a blogging platform. It's incredibly easy
+and trivial to deploy a new site with it and it comes with everything needed to
+write a blog. It's also incredibly easy to extend and with little work the whole
+SEO buzz stuff is pretty much already there. I've found that Wordpress makes it
+pretty hard for search engines to handle your content, but it is almost strictly
+a blogging platform.</p>
+<p>I've come to the realization that working on these platforms is just a pain in
+the bum. I don't want to have to go out to a website, even if my own, to write
+the the entry. Sure, you can load up an editor and write it in there, but that's
+just another hassle.</p>
+<p>On top of that, when any page is accessed, the platform has to render that page
+which is usually rather slow because it has to grab everything from a database
+and then assemble it. Adding cache can help substantially, but it's still not
+usually all that fast.</p>
+<p>So, I don't like these platforms anymore. As much as I was sold on them in the
+past, I just can't justify them anymore. Well, if I don't want to render the
+pages with every request and caching isn't enough, there's always static
+content.</p>
+<p>Static content is great because it's fast. However, if you're creating all of
+the content by hand, you get to repeat yourself rather frequently. You get to
+make sure all your pages stay in sync. Yuck!</p>
+<div class="section" id="in-comes-pelican">
+<h2>In Comes Pelican</h2>
+<p>Pelican is a python application that's rather neat. You get to write your blog
+content with restructuredtext or markdown. You have to set it up initially, but
+once you're done, you can just keep writing away and never worry about what's
+actually rendered. There's not really much to it. The best part is that because
+of how it works, you can use plugins to generate pre-gzipped pages and serve
+those when the browser will accept gzip encoding.</p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started</h2>
+<p>I'm going to explain how I utilize pelican for the very blog that you're reading
+right now.</p>
+<p>First, you need to install pelican.</p>
+<pre class="literal-block">
+aptitude install python-pelican
+</pre>
+<p>If you're still with me, then great! You should have no troubles with the rest!</p>
+<p>Next up, the directory structure:</p>
+<pre class="literal-block">
+mkdir -p /var/www/myblog/{content,plugins}
+touch /var/www/myblog/plugins/__init__.py
+</pre>
+<p>Followed by getting some themes others have contributed:</p>
+<pre class="literal-block">
+git clone https://github.com/getpelican/pelican-themes.git /var/www/myblog/themes
+</pre>
+<p>We'll follow that by grabbing two plugins that I personally find mandatory:</p>
+<pre class="literal-block">
+wget https://raw.github.com/getpelican/pelican-plugins/master/sitemap/sitemap.py -O /var/www/myblog/plugins/sitemap.py
+wget https://github.com/getpelican/pelican-plugins/blob/master/gzip_cache/gzip_cache.py -O /var/www/myblog/plugins/gzip_cache.py
+</pre>
+<p>Now we need to write a configuration file.</p>
+<p>vim /var/www/myblog/pelicanconf.py</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*- #</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="n">AUTHOR</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;michael&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;Michael Lustfield&#39;</span>
+<span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;http://michael.lustfield.net&#39;</span>
+<span class="n">PAGE_DIR</span> <span class="o">=</span> <span class="s1">&#39;content/pages&#39;</span>
+<span class="n">WITH_FUTURE_DATES</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;America/Chicago&#39;</span>
+<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;en&#39;</span>
+<span class="n">TYPOGRIFY</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;./themes/syte&#39;</span>
+
+<span class="n">FEED_RSS</span> <span class="o">=</span> <span class="s1">&#39;rss.xml&#39;</span>
+<span class="n">CATEGORY_FEED_RSS</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/rss.xml&#39;</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">ARTICLE_URL</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{category}</span><span class="s1">/</span><span class="si">{slug}</span><span class="s1">&#39;</span>
+<span class="n">ARTICLE_SAVE_AS</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{category}</span><span class="s1">/</span><span class="si">{slug}</span><span class="s1">.htm&#39;</span>
+
+<span class="n">GOOGLE_ANALYTICS</span> <span class="o">=</span> <span class="s1">&#39;&lt; YOUR GA CODE &gt;&#39;</span>
+
+<span class="n">PLUGINS</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;plugins.sitemap&#39;</span><span class="p">,</span> <span class="s1">&#39;plugins.gzip_cache&#39;</span><span class="p">]</span>
+<span class="n">SITEMAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;xml&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;priorities&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;articles&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s1">&#39;indexes&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s1">&#39;pages&#39;</span><span class="p">:</span> <span class="mf">0.5</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;changefreqs&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;articles&#39;</span><span class="p">:</span> <span class="s1">&#39;monthly&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;indexes&#39;</span><span class="p">:</span> <span class="s1">&#39;daily&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pages&#39;</span><span class="p">:</span> <span class="s1">&#39;monthly&#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+<p>This is almost the exact configuration I use for my blog. I use a different
+theme and have the GOOGLE_ANALYTICS variable filled in. Beyond that, this is it.</p>
+<p>Some notes about this...</p>
+<ul class="simple">
+<li>The content will generate links without the .htm</li>
+<li>The pages will be generated with the .htm extension</li>
+<li>There is a subdirectory created for each category</li>
+<li>All the posts in that category wind up under that directory</li>
+<li>There is an rss.xml file generated under each subdirectory for that category</li>
+<li>There is still an /rss.xml file generated</li>
+<li>The &quot;slug&quot; (name of the file without the extension) will be used for the URI</li>
+</ul>
+<p>I choose to put .htm files on the file system because that makes sense. However,
+it doesn't let me use pretty permalinks. I don't want .html in every request.
+When we get to the nginx part, we'll tell it to see if the requested file exists
+on the file system with either .htm or .html extension first.</p>
+</div>
+<div class="section" id="writing-content">
+<h2>Writing Content</h2>
+<p>A blog is useless without content. The Pelican docs have a <a class="reference external" href="http://docs.getpelican.com/en/3.2/getting_started.html#writing-content-using-pelican">Getting Started</a>
+page that explains writing content. I'm just going to go through the basics.</p>
+<p>Figure out the categories you want. These should be generic and sensible. For
+my blog, I have linux, nginx, rambling, and misc. You should always have a
+misc category, even if it's not used. You'll also want a directory for pages
+that aren't part of your blog.</p>
+<p>So...</p>
+<pre class="literal-block">
+mkdir /var/www/myblog/content/{linux,nginx,rambling,misc,pages}
+</pre>
+<p>So, let's say we want to write a blog about Linux and grafiti.</p>
+<pre class="literal-block">
+vim /var/www/myblog/content/linux/linux-and-grafiti.rst
+</pre>
+<p>Yay, we're now writing a blog post in the linux category about linux and
+grafiti. The blog entry will look like this:</p>
+<div class="highlight"><pre><span></span><span class="gh">Linux, Grafiti, and You</span>
+<span class="gh">=======================</span>
+<span class="nc">:date:</span> 2013-12-05
+<span class="nc">:tags:</span> linux, grafiti
+
+Some content written with restructuredtext...
+</pre></div>
+<p>That's all there is to writing content! Se the <a class="reference external" href="http://docs.getpelican.com/en/3.2/getting_started.html#writing-content-using-pelican">Getting Started</a> page in the
+Pelican docs to get further details.</p>
+</div>
+<div class="section" id="publishing-content">
+<h2>Publishing Content</h2>
+<p>Run the command:</p>
+<pre class="literal-block">
+pelican -s /var/www/myblog/pelicanconf.py
+</pre>
+<p>and your content will be generated in output/.</p>
+<p>Want to update your content? It's the same command. You can put that in a
+cron task if you like. If you put it in cron, you'll probably want to add the
+-q flag as well.</p>
+</div>
+<div class="section" id="making-nginx-serve-content">
+<h2>Making Nginx Serve Content</h2>
+<p>First, we need to install Nginx:</p>
+<pre class="literal-block">
+aptitude install nginx-light
+</pre>
+<p>If you have a default server block, it's only there as an example. Feel free to
+get rid of it:</p>
+<pre class="literal-block">
+rm /etc/nginx/sites-enabled/default
+</pre>
+<p>Now we need to write a configuration file for the blog.</p>
+<p>vim /etc/nginx/conf.d/myblog.conf:</p>
+<div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+
+    <span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+
+    <span class="kn">server_name</span> <span class="s">example.com</span><span class="p">;</span>
+    <span class="kn">root</span> <span class="s">/var/www/myblog/output</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="p">=</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="c1"># Instead of handling the index, just</span>
+        <span class="c1"># rewrite / to /index.html</span>
+        <span class="kn">rewrite</span> <span class="s">^</span> <span class="s">/index.html</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="c1"># Serve a .gz version if it exists</span>
+        <span class="kn">gzip_static</span> <span class="no">on</span><span class="p">;</span>
+        <span class="c1"># Try to serve the clean url version first</span>
+        <span class="kn">try_files</span> <span class="nv">$uri.htm</span> <span class="nv">$uri.html</span> <span class="nv">$uri</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="p">=</span> <span class="s">/favicon.ico</span> <span class="p">{</span>
+        <span class="c1"># This never changes, so don&#39;t let it expire</span>
+        <span class="kn">expires</span> <span class="s">max</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="s">^~</span> <span class="s">/theme</span> <span class="p">{</span>
+        <span class="c1"># This content should very rarely, if ever, change</span>
+        <span class="kn">expires</span> <span class="s">1y</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>The gzip_static directive tells nginx that if the file should be served gzipped
+that we may, and do, have the file already gzipped and to use that instead. It
+means that nginx doesn't need to use any extra CPU to serve gzipped data.</p>
+<p>From above, we generate links without the .htm extension, but we generate the
+files with them. That's just a way to make the request pretty. Our try_files
+directive makes it possible to do that.</p>
+<p>Go ahead and restart nginx:</p>
+<pre class="literal-block">
+service nginx restart
+</pre>
+<p>Go check out your new blog! It's all static content and serving it is fast. :D</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/nginx.html">nginx</a> #<a href="https://michael.lustfield.net/tag/pelican.html">pelican</a> #<a href="https://michael.lustfield.net/tag/blog.html">blog</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Keeping Information Technology DRY (Don&#39;t Repeat Yourself)" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Michael Lustfield - Keeping IT DRY</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <section id="page-main" role="main">
+      <h1>Keeping IT DRY</h1>
+      <p>Acronyms!</p>
+<ul class="simple">
+<li>IT: Information Technology</li>
+<li>DRY: Don't Repeat Yourself</li>
+</ul>
+<p>The concept of &quot;DRY&quot; was first written about in the book The Pragmatic
+Programmer, but it wasn't new then. You have more than likely heard someone
+tell you something like, &quot;Listen now, because I'm not repeating myself!&quot;</p>
+<p>Why don't we like repeating ourselves? Easy! Doing something twice means you've
+wasted effort. When it comes to coding and scripting, if you need to update
+that bit, you have to update it twice. When you explain something, you have to
+explain it twice.</p>
+<p>When you keep your IT DRY it means that you don't repeat tasks. If something
+needs to be done with repetition, you write a script. If you could have two
+scripts that do nearly the same thing, you combine them and make it use a
+parameter to differentiate what is happening.</p>
+<p>Example:</p>
+<pre class="literal-block">
+/usr/local/sbin/backup-script-linux
+/usr/local/sbin/backup-script-aix
+/usr/local/sbin/backup-script-windows
+
+vs.
+
+/usr/local/sbin/backup-script -t linux
+/usr/local/sbin/backup-script -t aix
+/usr/local/sbin/backup-script -t windows
+</pre>
+<p>See the difference? If backup-script ever needs to be changed because some
+reporting server ever moved, then you get to update it either three times in
+the individual scripts, or once in the single script that accepts a parameter.</p>
+<p>That's a rather trivial example. Do you SSH into many servers every day and
+start or resume screen or tmux every time you get in? That's another chance for
+automation! Make those start or resume automatically every time.</p>
+<p>The trick for that...</p>
+<p>In ~/.bash_aliases (.bashrc), I have something like this:</p>
+<pre class="literal-block">
+ssh() {
+    if [[ &quot;$2&quot; ]]; then
+        command ssh $&#64;;
+    else
+        command ssh &quot;$1&quot; -t screen -A -d -RR work bash
+    fi
+}
+</pre>
+<p>This is rather simplified from what I actually use, but this works for the use
+case I specified.</p>
+<div class="section" id="the-point">
+<h2>The Point</h2>
+<p>The IT world should NEVER repeat itself. That's the general point of this blog.
+If I get frequent requests for help on a topic, I'll write the post rather than
+continue to explain the same thing repeatedly. That's the point/goal of my this
+site.</p>
+<pre class="literal-block">
+Keep your IT DRY!
+</pre>
+</div>
+
+      </section> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

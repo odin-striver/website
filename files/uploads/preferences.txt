@@ -1,0 +1,123 @@
+Package: *
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: -10
+
+Package: libapache2-mod-php5
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: libapache2-mod-php5filter
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php-pear
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-cgi
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-cli
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-common
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-curl
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-dbg
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-dev
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-enchant
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-fpm
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-gd
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-mp
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-imap
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-interbase
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-intl
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-ldap
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-mcrypt
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-mysql
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-odbc
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-pgsql
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-pspell
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-recode
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-snmp
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-sqlite
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-sybase
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-tidy
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-xmlrpc
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5-xsl
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999
+
+Package: php5
+Pin: origin "packages.dotdeb.org"
+Pin-Priority: 999

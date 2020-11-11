@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Set up alerts for irssi on your desktop" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Perfect Irssi and OpenBox Integration - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="irc, openbox" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/perfect-irssi-and-openbox-integration" title="Permalink «Perfect Irssi and OpenBox Integration»">Perfect Irssi and OpenBox Integration</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2008-12-30T19:11:00-06:00">Tue 30 December 2008</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/irc.html">irc</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/openbox.html">openbox</a>-->        </div>
+      </header>
+        <p>I think I achieved nearly the perfect Irssi + OpenBox.</p>
+<p>There's four steps to my setup. Configuring gnome-terminal, alltray,
+irssi, and an image.</p>
+<p>First of all, we need to set up irssi. If your'e reading this, I'm
+guessing you've already done this. I use murf. You can find themes at
+<a class="reference external" href="http://irssi.org/themes">http://irssi.org/themes</a>. Download one, place it in ~/.irssi/ and
+execute /theme inside of irssi. You can do /save to save these settings.</p>
+<p>To set up gnome-terminal, go to Edit &gt; Current Profile. Go to the
+Effects tab. Now choose the Background Image option. I uploaded an image
+that somebody gave me that I really liked. Just download it to wherever
+you want. Spaces in the path name are usually bad. Once you set the
+background image, you will want to change the transparency level. This
+is a rather bright image. I turned it down to about 80% opacity. The
+image is uploaded as cavechaos.jpg. I keep this file in
+~/Pictures/Backgrounds/</p>
+<p>Now on to allray. Install it using sudo aptitude install alltray. This
+will allow you to run your application in a tiny icon on your tray. I
+use pypanel for this. Some people just use docker, but I'm pretty stuck
+on pypanel.</p>
+<p>Now that we have alltray, we need to add some pretty pictures for it. If
+you try to run gnome-terminal inside of alltray right now, you will get
+kind of an ugly terminal icon. I prefer something a little more fitting.
+I uploaded a copy of irssi.png. I use a very black theme so a black icon
+doesn't really work. I inverted the colors and came up with
+irssi-invert.png. These images just came from the official irssi.org
+site. I keep these in ~/.icons/</p>
+<p>Now to bring them all together. I just have a menu entry with the exact
+text. Remember where I keep everything and adjust this accordingly.</p>
+<pre class="literal-block">
+alltray -s -na -i ~/.icons/irssi-invert.png &quot;gnome-terminal --hide-menubar -t irssi -e irssi&quot;
+</pre>
+<p>It looks like a lot, but I'll break it down.</p>
+<pre class="literal-block">
+alltray:
+    -s - Makes the window shown when it launches rather than hiding it
+    -na - Keeps (AllTray) from showing up in the title
+    -i - Gives alltray an icon to use in the tray
+    &quot; &quot; - Everything inside quotes is what alltray will call
+
+gnome-terminal:
+    --hide-menubat - Keeps the menu hidden.
+    Having multiple tabs can affect the way irssi behaves.
+    -t - This is the text gnome-terminal passes to the WM for the title
+    -e - This is what gnome-terminal will execute.
+</pre>
+<p>Problems with this setup:</p>
+<ol class="arabic simple">
+<li>I need to figure out how to make gnome-terminal startup maximized.</li>
+<li>I need to figure out how to make gnome-terminal startup on screen 2.</li>
+<li>Gnome-terminal doesn't grab the title and instead uses &quot;Unnamed Window&quot;</li>
+</ol>
+<p>Attachments:</p>
+<p><img alt="image0" src="files/icons/image-x-generic.png" /> <a class="reference external" href="/files/uploads/cavechaos.jpg">cavechaos.jpg</a></p>
+<p><img alt="image0" src="files/icons/image-x-generic.png" /> <a class="reference external" href="/files/uploads/irssi.png">irssi.png</a></p>
+<p><img alt="image0" src="files/icons/image-x-generic.png" /> <a class="reference external" href="/files/uploads/irssi-invert.png">irssi-invert.png</a></p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/irc.html">irc</a> #<a href="https://michael.lustfield.net/tag/openbox.html">openbox</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Building a light and tiny linux kernel in ubuntu" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Light Weight Ubuntu Kernel - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="kiss, overkill" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/light-weight-ubuntu-kernel" title="Permalink «Light Weight Ubuntu Kernel»">Light Weight Ubuntu Kernel</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2009-12-04T17:36:00-06:00">Fri 04 December 2009</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/kiss.html">kiss</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/overkill.html">overkill</a>-->        </div>
+      </header>
+        <p>As a preliminary note: DO NOT follow anything in this and proceed to ask
+for help. If you follow this than consider yourself void of ANY support.
+Especially from the -kernel channel. They support and develop stock
+kernels, not your personal modifications.</p>
+<p>Now.. In my quest for a fast boot time into a fully functional system
+that is very light weight, I tried out Gentoo. After using Gentoo I
+discovered that they're not that &quot;ricer&quot; community everyone claims they
+are. In many way's they're the exact opposite. Sure some of them fall
+into the ricer category but they're not very common.</p>
+<p>One of the biggest aspects of Gentoo is that you compile your own
+kernel. This was the most painful parts for me until I finally got the
+hang of it. The default Gentoo kernel is minimal and requires you to
+enable some extra features before compiling.</p>
+<p>I decided to take this to the next step and after getting the kernel to
+work spend a massive amount of time trimming out the 'fat' that was
+default. By doing this I got a firm understanding of what each piece of
+the configuration was and the arrangement inside menuconfig. This is
+where I started to take on the ricer nick.</p>
+<p>After a while I tired of Gentoo and my short segue neared to an end. I
+have continued to hang around their awesome community. They're
+incredibly helpful for any distribution and are great to just have a
+chat with.</p>
+<p>During my return to Ubuntu I took the realization that the existing
+kernel is very heavy. Of course part of the appeal of Ubuntu is that it
+&quot;just works&quot; for anyone. I really did become a ricer and decided to see
+what I could do.</p>
+<p>The general process is:</p>
+<pre class="literal-block">
+aptitude install git-core
+git clone git://kernel.ubuntu.com/ubuntu/ubuntu-karmic.git
+cd ubuntu-karmic
+git tag -l Ubuntu-*
+git checkout [LatestTag]
+make menuconfig
+# Tweak the crap out of it
+make all modules_install install
+update-grub
+</pre>
+<p>To update when a new kernel is released:</p>
+<pre class="literal-block">
+cd ubuntu-karmic
+git fetch
+git checkout [LatestTag]
+make all modules_install install
+</pre>
+<p>That is the simplest way to deal your own kernel. Don't think you're
+smart enough for the KernelTeam though. These guys deal with the kernel
+code and work on modifications that are intended to eventually make it
+into the mainline kernel tree. It's also not how they suggest packaging
+it for further distribution or proper installation.</p>
+<p>What you can now do is - as I said above - tweak the crap out of your
+kernel. I was able to get my kernel under 2.4MB in size without any
+init*. This is very small and gave a very noticeable change in the
+system.</p>
+<ul class="simple">
+<li>Many kernel panics</li>
+<li>Could log into system</li>
+<li>Severe overheating</li>
+<li>Couldn't connect to any network</li>
+<li>Couldn't load profile when logging into system</li>
+<li>Unmounted file systems</li>
+<li>No 64bit support (mostly java/flash issues resulted)</li>
+<li>No AppArmor support</li>
+<li>No iptables support</li>
+<li>No encryption support</li>
+<li>Various other issues</li>
+</ul>
+<p>Those are just some of the issues I caused for myself. Read that again,
+I caused these issues for myself. That means it was my fault and it was
+up to me to fix these issues.</p>
+<p>I have no time available to me to 'rice' this more but I would like to.
+I'll just have to consider that rather than reserving memory for the
+kernel, it actually frees memory. I've been happy with the performance
+change as well. This will just have to be enough for me.</p>
+<p>I'm attaching my kernel configuration for your reference. Keep in mind
+that I said this is tweaked for just me. That means that it is almost
+guaranteed to not work on your system. Rather, you can just use it to
+see some of the changes I made and play with them incrementally.</p>
+<p>Attachments:</p>
+<p><img alt="image0" src="/files/icons/text-plain.png" /> <a class="reference external" href="/files/uploads/kernel.config">kernel.config</a></p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/kiss.html">kiss</a> #<a href="https://michael.lustfield.net/tag/overkill.html">overkill</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

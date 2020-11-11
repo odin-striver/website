@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Getting geo coordinates into elasticsearch 2" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Geo Point with Elasticsearch 2.x - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="elasticsearch, kibana, logstash, geo" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/misc/rss.xml">Misc (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/misc/geo-point-with-elasticsearch-2x" title="Permalink «Geo Point with Elasticsearch 2.x»">Geo Point with Elasticsearch 2.x</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2015-12-22T00:00:00-06:00">Tue 22 December 2015</time>
+            in «<a href="https://michael.lustfield.net/category/misc">misc</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/elasticsearch.html">elasticsearch</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/kibana.html">kibana</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/logstash.html">logstash</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/geo.html">geo</a>-->        </div>
+      </header>
+        <p>I was recently brought into an interesting project that deals with analyzing
+some exciting data. I have my preferred search solutions and hate java, but
+I had to bite my tongue and acknowledge an ELK stack is the best tool for this
+particular job.</p>
+<div class="section" id="elk-stack">
+<h2>ELK Stack</h2>
+<p>An &quot;ELK stack&quot; refers to logstash, elasticsearch, and kibana. It's worth noting
+that one should always ensure the versions they use match up on the compatibility
+matrix.</p>
+<p>Back in the kibana 3 days, things were pretty magical. There was less integration
+with elasticsearch and kibana was mostly left up to guess what was in elasticsearch.</p>
+</div>
+<div class="section" id="kibana-4">
+<h2>Kibana 4</h2>
+<p>Kibana 4 has significantly more features and more integration with elasticsearch,
+but it means a lot of added complexity. The number one headache I faced was
+putting a geo_point into elasticsearch so that kibana 4 could plot it. I had the
+geo coordinates, so it seemed like sticking it into a geo_point field should be
+absolutely trivial.</p>
+<p>Unfortunately, you can't just tell logstash that these coordinates are
+geographical coordinates. That's because logstash will speak JSON and geo_point
+is not a valid type.</p>
+</div>
+<div class="section" id="elk-and-geo-point">
+<h2>ELK and geo_point</h2>
+<p>In order to get our coordinates from logstash to a kibana 4 map, we have two
+options. Our first option is to issue a curl request against elasticsearch that
+will modify the index. In my opinion, this is a sub-par option. The other option
+is to generate a new template to be used on a new index that includes the
+coordinates. This means doing everything within logstash.</p>
+</div>
+<div class="section" id="logstash-template">
+<h2>Logstash Template</h2>
+<p>The default template for any elasticsearch index matching &quot;logstash-*&quot; is
+&quot;elasticsearch-template.json&quot; and it's location depends on how you chose to
+install logstash.</p>
+<p>It's contents will look like this:</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;logstash-*&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;index.refresh_interval&quot;</span><span class="p">:</span> <span class="s2">&quot;5s&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;mappings&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;_default_&quot;</span><span class="p">:</span> <span class="p">{</span>
+       <span class="nt">&quot;_all&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nt">&quot;omit_norms&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+       <span class="nt">&quot;dynamic_templates&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span>
+         <span class="nt">&quot;message_field&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="nt">&quot;match&quot;</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">,</span>
+           <span class="nt">&quot;match_mapping_type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+           <span class="nt">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;analyzed&quot;</span><span class="p">,</span> <span class="nt">&quot;omit_norms&quot;</span><span class="p">:</span> <span class="kc">true</span>
+           <span class="p">}</span>
+         <span class="p">}</span>
+       <span class="p">},</span> <span class="p">{</span>
+         <span class="nt">&quot;string_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+           <span class="nt">&quot;match&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+           <span class="nt">&quot;match_mapping_type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+           <span class="nt">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;analyzed&quot;</span><span class="p">,</span> <span class="nt">&quot;omit_norms&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+               <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+                 <span class="nt">&quot;raw&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;not_analyzed&quot;</span><span class="p">,</span> <span class="nt">&quot;ignore_above&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">}</span>
+               <span class="p">}</span>
+           <span class="p">}</span>
+         <span class="p">}</span>
+       <span class="p">}</span> <span class="p">],</span>
+       <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+         <span class="nt">&quot;@version&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;not_analyzed&quot;</span> <span class="p">},</span>
+         <span class="nt">&quot;geoip&quot;</span>  <span class="p">:</span> <span class="p">{</span>
+           <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+             <span class="nt">&quot;dynamic&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+             <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+               <span class="nt">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;geo_point&quot;</span> <span class="p">}</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>This geoip field is for if we're providing an IP address that we want processed
+and turned into geographical coordinates. In our scenario, we already have this
+data, so this field is useless. However, we do need a geo_point field.</p>
+<p>Let's create /etc/logstash/templates/monster.json:</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;monster-*&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;index.refresh_interval&quot;</span><span class="p">:</span> <span class="s2">&quot;60s&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;mappings&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;_default_&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;_all&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nt">&quot;omit_norms&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+      <span class="nt">&quot;dynamic_templates&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span>
+        <span class="nt">&quot;message_field&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;match&quot;</span><span class="p">:</span> <span class="s2">&quot;message&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;match_mapping_type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;analyzed&quot;</span><span class="p">,</span> <span class="nt">&quot;omit_norms&quot;</span><span class="p">:</span> <span class="kc">true</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="p">{</span>
+        <span class="nt">&quot;string_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;match&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;match_mapping_type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;analyzed&quot;</span><span class="p">,</span> <span class="nt">&quot;omit_norms&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;raw&quot;</span><span class="p">:</span> <span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;not_analyzed&quot;</span><span class="p">,</span> <span class="nt">&quot;ignore_above&quot;</span><span class="p">:</span> <span class="mi">256</span><span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span> <span class="p">],</span>
+      <span class="nt">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;@version&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="s2">&quot;not_analyzed&quot;</span> <span class="p">},</span>
+        <span class="nt">&quot;lonlat&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;geo_point&quot;</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>What changed:</p>
+<ul class="simple">
+<li>Template name changed</li>
+<li>The geoip object was removed</li>
+<li>The lonlat field was added</li>
+</ul>
+</div>
+<div class="section" id="logstash-configuration">
+<h2>Logstash Configuration</h2>
+<p>Everything in logstash is driven by the configuration files. These are usually
+located in /etc/logstash/conf.d/&lt;filename&gt;.conf.</p>
+<p>To get this working, we need to ensure that the lonlat field is populated and we
+need to make sure the output uses the correct index name and template.</p>
+<p>The filter { } section is relatively simple. In my case, I had the data, but the
+longitude and latitude fields were flipped.</p>
+<p>My filter section of /etc/logstash/conf.d/monster.json:</p>
+<div class="highlight"><pre><span></span>filter {
+  # Monster Attacks
+  if [type] == &quot;monster_data&quot; {
+    # [...]
+    if [monster_location] {
+      grok {
+        match =&gt; [ &quot;monster_location&quot;, &quot;%{BASE10NUM:latitude:float},%{BASE10NUM:longitude:float}&quot; ]
+      }
+      mutate {
+        add_field =&gt; [ &quot;[lonlat]&quot;, &quot;%{longitude}&quot; ]
+        add_field =&gt; [ &quot;[lonlat]&quot;, &quot;%{latitude}&quot; ]
+      }
+    }
+  }
+}
+</pre></div>
+<p>The next thing we need is an output to elasticsearch that pulls all of these
+modifications together.</p>
+<div class="highlight"><pre><span></span>output {
+  if [type] == &quot;monster_data&quot; {
+    # Send to elasticsearch set hosts entry to the IP of your elasticsearch node
+    elasticsearch {
+      template =&gt; &quot;/etc/logstash/templates/monster.json&quot;
+      template_overwrite =&gt; true
+      hosts =&gt; &quot;127.0.0.1:9200&quot;
+      workers =&gt; &quot;2&quot;
+      index =&gt;  &quot;monster-%{+YYYY.MM.dd}&quot;
+    }
+  }
+}
+</pre></div>
+<p>This is an output to elasticsearch that uses our custom template.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>Now, feel free to start ingesting data. When you try to plot these points on a
+map within Kibana 4, you'll be able to use the lonlat field that we created.</p>
+<p>Overall, this is actually a <em>very</em> simple thing to do. It's just been documented
+very poorly. I hope that this helps others learn about storing a geo_point field
+as well as working with logstash templates. :)</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/misc">misc</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/elasticsearch.html">elasticsearch</a> #<a href="https://michael.lustfield.net/tag/kibana.html">kibana</a> #<a href="https://michael.lustfield.net/tag/logstash.html">logstash</a> #<a href="https://michael.lustfield.net/tag/geo.html">geo</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

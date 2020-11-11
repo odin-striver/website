@@ -1,0 +1,18 @@
+[retriever]
+type = SimplePOP3SSLRetriever
+server = SERVER
+username = USERNAME
+port = 995
+password = PASSWORD
+
+[destination]
+type = MDA_external
+path = /usr/bin/procmail
+arguments = ("$HOME/.synmail/gm1-proc", " ")
+
+[options]
+delete = true
+verbose = 2
+delivered_to = false
+received = false
+

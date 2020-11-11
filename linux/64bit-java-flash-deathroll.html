@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Getting java and flash to work on a 64 bit Linux server" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>64bit Java / Flash Deathroll - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="java, flash" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/64bit-java-flash-deathroll" title="Permalink «64bit Java / Flash Deathroll»">64bit Java / Flash Deathroll</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2009-09-10T16:43:00-05:00">Thu 10 September 2009</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/java.html">java</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/flash.html">flash</a>-->        </div>
+      </header>
+        <p>I think Linux users can safely agree that Flash and Java make web usage into a
+battle ground. Many of us choose to blame the issue on the distribution we use.
+When we favor our distribution too much we'll point fingers at Sun or Adobe. If
+we use the FOSS versions we'll point fingers at the respective maintainers.</p>
+<p>The sad truth is that I'm writing this not really knowing where the blame lies.
+However, I'm not sure that it even matters. I don't care whose fault it is, I
+just want it to work.</p>
+<p>How can we fix this plaguing problem? For starters, I think we need to get back
+to our roots. Rather than rely on the repositories, lets roll back to pulling
+the vanilla packages. For me, this worked like absolute perfection.</p>
+<p>Note that I'm using 64bit and this is where most issues are. Following this with
+32bit is nearly the exact same except for the obvious changes.</p>
+<p>To get ‘vanilla' 64bit java:</p>
+<p>Download 64bit java tarball from <a class="reference external" href="http://www.java.com/">http://www.java.com/</a>.</p>
+<p>As Root:</p>
+<pre class="literal-block">
+# Remove old java
+aptitude purge sun-java6-jdk sun-java6-bin sun-java6-jre sun-java6-plugin
+# Create the directory
+mkdir -p /opt/java/66
+# Move the downloaded package to the new directory
+mv ~/jre-6u17-linux-x64.bin /opt/java/64
+# Make the file executable
+chmod +x ~/jre-6u17-linux-x64.bin
+# Execute the binary file / Unpacks java
+/opt/java/64/jre-6u17-linux-x64.bin
+Do you agree to the above license terms? [yes or no] yes
+# Install the java option
+update-alternatives --install &quot;/usr/bin/java&quot; &quot;java&quot; &quot;/opt/java/64/jre1.6.0_17/bin/java&quot; 1
+# Set the Java option
+update-alternatives --set java /opt/java/64/jre1.6.0_17/bin/java
+</pre>
+<p>As User:</p>
+<pre class="literal-block">
+# Create the plugins directory if it doesn't exist
+mkdir ~/.mozilla/plugins
+# Force the creation of a symbolic link to the installed java
+ln -sf /opt/java/64/jre1.6.0_17/lib/amd64/libnpjp2.so ~/.mozilla/plugins/
+</pre>
+<p>Now you need to get flash working:</p>
+<p>Download the latest flash player from <a class="reference external" href="http://labs.adobe.com/downloads/flashplayer10_64bit.html">http://labs.adobe.com/downloads/flashplayer10_64bit.html</a></p>
+<p>As root:</p>
+<pre class="literal-block">
+# Remove old flash
+aptitude purge flashplugin-nonfree flashplugin-installer
+rm -f /usr/lib/mozilla/plugins/*flash*
+rm -f ~/.mozilla/plugins/*flash*
+rm -f /usr/lib/firefox/plugins/*flash*
+rm -f /usr/lib/firefox-addons/plugins/*flash*
+rm -rfd /usr/lib/nspluginwrapper
+</pre>
+<p>As User:</p>
+<pre class="literal-block">
+# Unpack flash
+tar zxf libflashplayer-10.0.32.18.linux-x86_64.so.tar.gz
+# Create plugins directory if it doesn't exist
+mkdir ~/.mozilla/plugins
+# Move flash to plugins directory
+mv libflashplayer.so ~/.mozilla/plugins/
+</pre>
+<p>Now to test that it works...</p>
+<ul class="simple">
+<li>Test Java: <a class="reference external" href="http://java.com/en/download/installed.jsp">http://java.com/en/download/installed.jsp</a></li>
+<li>Test Flash: <a class="reference external" href="http://www.adobe.com/shockwave/welcome">http://www.adobe.com/shockwave/welcome</a></li>
+<li>Test Flash Note: Ignore the &quot;Adobe Shockwave Player&quot;</li>
+</ul>
+<p>NOW! What does this mean? It sure doesn't prove that Adobe or Sun are against
+Linux. I really don't think we suspected Sun of that. It could possibly prove
+that our distributions aren't keeping up on these issues. Considering the vast
+number of distributions with the issue, I don't think that's really the case
+either. I would point fingers at those that maintain the packages but I know
+some of them personally and I can guarantee flash/java are important to them.</p>
+<p>Where does that leave us? It leaves us with a whole massive list of suspects.
+Each and every package installed on a system could be causing part of the
+problem. GTK+ update caused many issues and I can see that being part of the
+existing issue. However, I doubt it's the only reason.</p>
+<p>Thousands of bugs have been created in the issue queues among the bug trackers
+for many distributions as well as many different packages.</p>
+<p>I have no doubt the issue will be resolved at some point. Adobe and Sun have
+proven to be taking an active role in this support. It's just up to us to track
+down and destroy the remainder of issues. Our big up side is that the companies
+aren't against our success. As opposed to multimedia companies because of that
+dang DRM crap that they worship…</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/java.html">java</a> #<a href="https://michael.lustfield.net/tag/flash.html">flash</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

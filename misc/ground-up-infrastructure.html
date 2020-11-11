@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Rebuilding an entire infrastructure from scratch after a fat finger" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Ground Up Infrastructure - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="infrastructure, debian, networking, virtualization" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/misc/rss.xml">Misc (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/misc/ground-up-infrastructure" title="Permalink «Ground Up Infrastructure»">Ground Up Infrastructure</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2016-01-02T00:00:00-06:00">Sat 02 January 2016</time>
+            in «<a href="https://michael.lustfield.net/category/misc">misc</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/infrastructure.html">infrastructure</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/debian.html">debian</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/networking.html">networking</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/virtualization.html">virtualization</a>-->        </div>
+      </header>
+        <p>I've been working with a company that recently lost a very large amount of their
+infrastructure. Not only were servers lost, but also backups, application data,
+and much more. Unfortunately, I'm not at liberty to share too many details, but
+I am able to say that it was the situation your worst nightmares are made of.</p>
+<p>Very recently, I also lost all of my personal infrastructure. I lost all virtual
+machines, VM hosts, networking configuration, router configs, firewall rules,
+backups, the other backups, the third set of backups, AP configs, etc. It was
+rather brutal. The only thing I got to keep was my laptop and anything I've put
+on a public service.</p>
+<div class="section" id="disaster-recovery">
+<h2>Disaster Recovery</h2>
+<p>First of all, both situations had very different causes. One was malicious and
+the other was entirely PEBKAC. The company I've been working with was quite
+fortunate and, because of some encryption, the tapes were able to be recovered.</p>
+<p>The lesson learned here is that just having a disaster recovery plan and testing
+it isn't enough. You need to test it from <em>NOTHING</em>. Don't test restoring a VM
+onto a hypervisor. Test it by building a new UCS fabric interconnect from only
+what you would have available if your building disappeared this second.</p>
+<p>In my personal situation, there was <em>nothing</em> to go back to. So, I got to build
+my personal infrastructure from the group all the way back up to the top. How
+this happens is a question I've been asked many times. Instead of trying to
+explain it each time, I decided I'd prefer just write about it and hope that the
+information is valuable to others. If I provide poor information, I hope I get
+yelled at so that I can correct any mistakes.</p>
+</div>
+<div class="section" id="the-basics">
+<h2>The Basics</h2>
+<p>Where a person (or organization) chooses to start rebuilding from scratch is
+entirely up to them. In a larger organization, I would expect to see each piece
+managed by a separate team that I would hope are communicating effectively.</p>
+<p>The basics that nearly every infrastructure has:</p>
+<ul class="simple">
+<li>Switches</li>
+<li>Routers</li>
+<li>Physical Servers</li>
+<li>Virtual Servers</li>
+<li>Hypervisors</li>
+<li>Access Points</li>
+<li>Backups</li>
+<li>VLAN's</li>
+<li>Backups</li>
+<li>Configuration Management Systems</li>
+<li>Git Server</li>
+</ul>
+<p>Yes, as a matter of fact, I <em>do</em> consider git and salt (configuration management)
+to be critical pieces. You should too. Having all salt data held within git is
+the only reason I was able to get things back up as quickly as I did.</p>
+<p>My preference was to start with the switch configs. Thanks to salt, I just copied
+and pasted the previous configuration I had on my laptop. Next up was the VM Host.</p>
+</div>
+<div class="section" id="preparations">
+<h2>Preparations</h2>
+<p>Before getting started, I connected to my cable modem directly with my laptop and
+then downloaded a proxmox and pfsense ISO. With my particular setup and the order
+this particular rebuild was happening in, those were the &quot;off-line&quot; resources I
+needed to aquire.</p>
+</div>
+<div class="section" id="vm-host">
+<h2>VM Host</h2>
+<p>I chose proxmox because I have a lot of experience with it and it runs on Debian.
+If you're not me, it might be wise to explore your options. I also chose to
+install proxmox entirely off of the network because it couldn't have reached the
+Internet anyway and I didn't want to deal with the cabling or switch port
+configurations.</p>
+<p>The proxmox installer is pretty dumb. You select a disk, IP settings, and that's
+pretty much it. After the installation finishes, it's time to configure it. Since
+this is Debian and I'm familiar with the way proxmox interacts with it, I went
+directly into <cite>/etc/network/interfaces</cite> and modified it to be exactly what I
+wanted to be there. I also got to edit udev rules to modify ethX assignments.</p>
+<p>WAN:</p>
+<ul class="simple">
+<li>WAN -&gt; eth2</li>
+<li>eth2 -&gt; vmbr1</li>
+<li>vmbr1 -- &lt;WAN_IF_on_pfSense&gt;</li>
+</ul>
+<p>LAN:</p>
+<ul class="simple">
+<li>eth0 -&gt; bond0</li>
+<li>eth1 -&gt; bond0</li>
+<li>bond0 -&gt; vmbr0 (802.3ad)</li>
+<li>vmbr0 -- &lt;LAN_Interfaces_with_VLAN_Tag&gt;</li>
+</ul>
+<p>Once configured, the VM host could be reattached to the switch without troubles.</p>
+<p>I connected to the proxmox web interface from my laptop, logged in, and created
+a VM (not container). This VM had one interface for vmbr0 and one for vmbr1. This
+is the <em>ONLY</em> system that ever does anything with vmbr1 or eth2. They are off
+limits to every other system including the host itself. There is one additional
+NIC attached per VLAN with the appropriate VLAN tag.</p>
+</div>
+<div class="section" id="router">
+<h2>Router</h2>
+<p>Now that the VM Host is up and has the VM created, it's time to spin up a virtual
+router. After uploading the pfSense ISO, I attached it to the VM and booted it up.
+The pfSense installation is pretty straight forward. Remember to double check the
+MAC addresses to ensure they match the interface you're configuring.</p>
+<p>I had to temporarily enable DHCP on the LAN interface while getting things
+rocking, but eventually stuck all servers into their own VLAN without DHCP and
+removed DHCP from LAN. DHCP (and DHCPv6) was only enabled on the guest, non-guest,
+and lab networks. Using static IP addresses means a faster boot time, but it also
+means less attack surfaces.</p>
+<p>When configuring VLAN's, be careful what you choose. If you're too restrictive up
+front, you'll run yourself into walls. If you're too open, you'll do the same.
+However, if you're using strictly IPv6 on a properly deployed, it's entirely
+irrelevant. You'll have exactly one /64 per subnet.</p>
+</div>
+<div class="section" id="switch">
+<h2>Switch</h2>
+<p>If I didn't have a switch configuration already available, this is where I would
+have started working on the switch. I configured an access port to be in the
+correct VLAN and connected my laptop to it. Then I grabbed a DHCP address.</p>
+<p>Once I was able to grab this address and talk to the Internet, I decided it was
+time for sleep. It was already 05:00 by this point.</p>
+<p>The only thing that was really special was having a pair of switch ports set up
+with LACP set up as a trunk port as well as another trunk port for my access
+point. The remaining ports were set up as standard access ports that were set to
+their correct VLAN.</p>
+</div>
+<div class="section" id="temp-wlc">
+<h2>Temp WLC</h2>
+<p>So far, I've been dealing with physical network connections. About now, I was
+getting quite frustrated with being connected to a wire.</p>
+<p>I deployed a temporary Wireless LAN Controller (WLC) VM to get the AP configured.
+Once deployed, I let the software configure the AP, configured the correct VLAN
+per SSID. I didn't get fancy at this point because it's all temporary.</p>
+</div>
+<div class="section" id="openvpn">
+<h2>OpenVPN</h2>
+<p>Now that I was comfortably working on my sofa, I decided to configure OpenVPN on
+pfSense. If you're going to do this, I strongly recommend installing the &quot;OpenVPN
+Client Export Utility&quot; because it makes life happy and grand.</p>
+</div>
+<div class="section" id="dynamic-dns">
+<h2>Dynamic DNS</h2>
+<p>This infrastructure is at a residental address and the ISP available no longer
+offers any static addresses. I set up DynDNS for the public address. Thankfully,
+this doesn't change unless the cable modem loses power.</p>
+<p>Everything is connected to a UPS that has been &quot;slightly&quot; modified to last
+&quot;slightly&quot; longer. This takes the appearance of two very large deep cycle
+batteries that could run 100% of my infrastructure (modem, VM host, wireless AP,
+etc.) for over a full day. That's more than sufficient in  my book. :D</p>
+<p>I happen to use Hurricane Electric for DNS. Within their interface, you can
+optionally select a record for Dynamic DNS. Afetr enabling it, there is a refresh
+icon on that line that you can select to generate a random key. Within pfSense,
+while creating the DynDNS entry, you'll need to configure these options:</p>
+<ul class="simple">
+<li>Service Type: he.net OR he.net (v6)</li>
+<li>Hostname: &lt;fqdn_of_dyndns_entry&gt;</li>
+<li>Username: &lt;fqdn_of_dyndns_entry&gt;</li>
+<li>Password: &lt;generated_key&gt;</li>
+</ul>
+</div>
+<div class="section" id="ipv6">
+<h2>IPv6</h2>
+<p>My ISP only offers a /64 for the entire network. If only they'd heard about RFC's
+and the value of following them. I need a minimum of a /60 for my network. This
+forced me to ignore native IPv6 from my ISP, I wound up using Tunnel Broker to get
+the /48 that my ISP should be providing.</p>
+</div>
+<div class="section" id="vm-template">
+<h2>VM Template</h2>
+<p>Now it's time to build a VM template for the virtual machines that will become
+the production image. To get started, I downloaded a copy of the Debian 8 template
+through the proxmox web interface.</p>
+<p>We'll assume the file is named /tmp/debian-8.0-standard.tar.gz. To open this
+archive for editing:</p>
+<ol class="arabic simple">
+<li>mkdir /tmp/d</li>
+<li>tar -zx -C /tmp/d -f /tmp/debian-8.0-standard.tar.gz</li>
+<li>mount -o rbind /dev /tmp/d/dev</li>
+<li>mount -t sysfs none /tmp/d/sys</li>
+<li>mount -t tmpfs none /tmp/d/tmp</li>
+<li>mount -t proc  none /tmp/d/proc</li>
+<li>cp /etc/resolv.conf /tmp/d/etc/resolve.conf</li>
+<li>chroot /tmp/d /bin/bash</li>
+</ol>
+<p>Next up, we want to modify the template. Things I did:</p>
+<ol class="arabic simple">
+<li>aptitude # remove any excess cruft you don't want</li>
+<li>aptitude install vim screen salt-minion apt-transport-https</li>
+<li>echo 'master: $fqdn_or_ip' &gt;/etc/salt/minion.d/master.conf</li>
+<li>salt-call state.sls sys.files.salt,sys.files.apt</li>
+<li>aptitude update; aptitude upgrade; aptitude clean</li>
+<li>aptitude purge -y --purge-unused ~c</li>
+<li>dpkg-reconfigure locales</li>
+<li>/etc/init.d/salt-minion stop</li>
+<li>rm -Rf /etc/salt/minion_id /etc/salt/pki</li>
+<li>cat /dev/null &gt;/etc/resolv.conf; exit</li>
+<li>rm /tmp/d/root/.bash_history</li>
+<li>umount /tmp/d/<em>/</em>; umount /tmp/d/*</li>
+<li>tar -czp -f /tmp/debian-8-&lt;your_tag&gt;.tar.gz * -C /tmp/d</li>
+</ol>
+<p>This new tarball just needs to be uploaded to your VM host.</p>
+<p>Side note, the packages I had installed went from 404 to 191 after removing what
+I considered extra cruft. That's 213 packages times the number of servers that
+won't need to be updated.</p>
+</div>
+<div class="section" id="salt-master">
+<h2>Salt Master</h2>
+<p>It's exciting to finally be at this point. It's pretty much pain free from this
+point on. In my opinion, configuration management is one of the absolute critical
+pieces of every infrastructure and my choice is salt. I deployed the new template
+and installed salt-master on it. Then I configured <cite>/etc/salt/master.d/main.conf</cite>.</p>
+<p>For the moment, I'll point salt-master at <cite>/srv/salt/{states,data,pillar}/</cite>. Then
+I wrote the states that now manage salt-master configs.</p>
+</div>
+<div class="section" id="git-server">
+<h2>Git Server</h2>
+<p>Next up is the git server! Deploy the VM template, create salt states to configure
+your choice of a git server. My choice was gogs (GO Git Service). It feels like a
+somewhat clunky version of gitlab with all of the feauters that I actually use
+but has a massively smaller footprint.</p>
+<p>Once this was up, I created a system account and group so that the salt master
+could access the salt states. Then I moved <cite>/srv/salt/{states,data,pillar}</cite> to
+their own repositories that the salt master could access. Then I modified the
+master config (using salt) to point at the git server instead of the local file
+system. Last, but not least, <cite>rm -rf /srv/salt</cite>.</p>
+</div>
+<div class="section" id="permanent-wlc">
+<h2>Permanent WLC</h2>
+<p>At this point, we're ready to deploy every single server by pushing commits to
+the git repositories. This is where I destroyed the old temporary WLC and created
+a new WLC server.</p>
+</div>
+<div class="section" id="security">
+<h2>Security</h2>
+<p>Hurray! I've now described exactly what my home network looks like and how to
+build it. Should I now be paranoid about getting attacked? Yup, absolutely! We all
+need to be paranoid all of the time. Keeping software in use hidden isn't anything
+I've ever considered to be confidential information.</p>
+<p>On that note, one level of paranoia that I love is having a special VLAN for
+accessing the server network. This means that, even if you get connected to my
+non-guest network, it still doesn't mean you can talk to my server network.</p>
+<p>I'm also pretty strict about firewall rules. Every connection in to or out of any
+VLAN needs an explicit firewall rule.</p>
+<p>There are billions of things a person can do to decrease security risk. I'd love
+to discuss many of them and might just need to write a separate blog post about
+it. The bottom line, though, is that security by obscurity or secrecy is not
+reliable security. If you build a strong and secure infrastructure, you should be
+able to feel confident explaining the intricacies of your network. Unless, of
+course, you're paranoid.</p>
+</div>
+<div class="section" id="what-comes-next">
+<h2>What Comes Next</h2>
+<p>After finishing all of that, I deployed a logging server and an apt caching proxy
+followed by writing salt states to make servers report to them. Next up is the
+backup server and configuring external backups.</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/misc">misc</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/infrastructure.html">infrastructure</a> #<a href="https://michael.lustfield.net/tag/debian.html">debian</a> #<a href="https://michael.lustfield.net/tag/networking.html">networking</a> #<a href="https://michael.lustfield.net/tag/virtualization.html">virtualization</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

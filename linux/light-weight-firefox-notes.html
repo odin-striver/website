@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Some firefox tweaks to help out productivity" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Light Weight Firefox Notes - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="kiss" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/light-weight-firefox-notes" title="Permalink «Light Weight Firefox Notes»">Light Weight Firefox Notes</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2010-07-17T22:55:00-05:00">Sat 17 July 2010</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/kiss.html">kiss</a>-->        </div>
+      </header>
+        <p>Lately I've been cumulating a very large list of things I need to do.
+It's been getting harder and harder to keep track of what I need to do.
+If I make a nice simple text file and a command to open up vim with my
+notes then I wind up adding notes but never checking them. That helps
+but it's not enough. There's a lot of really heavy note taking options
+out there. You could make your home page go to Google Notebook. That's
+definitely not light weight.</p>
+<p>I got fed up with these very heavy and cumbersome options. Instead, I
+wanted something that was magic and instant. I don't want to wait to
+load things. What do we come up with then?</p>
+<p>I started thinking about what applications I use the most. Firefox,
+irssi, claws-mail, the terminal. That covers most of it. With Firefox I
+open up new tabs all the time. BINGO! All I need to do is put my notes
+in that new tab before I press Ctrl+L or Ctrl+K. Simple right? Yes.</p>
+<p>Here's how I did it:</p>
+<p>First of all, we need to make a file for our notes. We'll place this in
+/home/YOUR_NAME/.notes. This leading dot (.) on the notes file will
+make it a hidden file. This will initially be a hidden file. I'd rather
+apply some pretty formatting. In this file I added the following text.</p>
+<p>~/.notes</p>
+<pre class="literal-block">
+&lt;style&gt; body { background-color: #BAD6AB; color: #000000; } &lt;/style&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt; Notes &lt;/h1&gt;
+</pre>
+<p>It's not W3C compliant and honestly I don't really care. For this
+purpose there's not really any sensible way to do it without using a
+second file. That adds weight that I don't want.</p>
+<p>Now we need to make this file our home page. I'm assuming you replaced
+YOUR_NAME with your actual user name above. We'll do that again. In
+Firefox, go to Edit &gt; Preferences. Under th</p>
+<p>e General tab you will see a Startup box. In the &quot;When Firefox starts:&quot;
+drop down pick Show my home page.&quot; In the &quot;Home Page:&quot; text box type
+&quot;<a class="reference external" href="file:///home/YOUR_NAME/.notes">file:///home/YOUR_NAME/.notes</a>&quot; without the quotes. Now when you open
+Firefox, this file will be displayed.</p>
+<p>This still isn't simple or easy though. We definitely want to make it
+easy to enter notes. Let's do this. I use rxvt and dash because they're
+as light as you can get without being pieces of crap. I also use
+Openbox. I added a section to my rc.xml file that looks like this.</p>
+<p>~/.config/openbox/rc.xml</p>
+<pre class="literal-block">
+&lt;keybind key=&quot;W-n&quot;&gt;
+    &lt;action name=&quot;Execute&quot;&gt;
+        &lt;execute&gt;rxvt --geometry 100x1+300+300 +sb -fn 9x15 -bg black -fg grey -T Notes -e /bin/dash -c 'read -p &quot;Note: &quot; note &amp;&amp; echo &quot;&amp;lt;p&amp;gt;$note&amp;lt;/p&amp;gt;&quot; &gt;&gt; ~/.notes'&lt;/execute&gt;
+    &lt;/action&gt;
+&lt;/keybind&gt;
+</pre>
+<p>I broke this onto a few lines for readability. The non-broken command is
+a few lines down.</p>
+<p>This runs the command when I press Win+n. The important thing to take
+away from this is the section between the execute tags. It is the
+shortcut that you need to run.</p>
+<pre class="literal-block">
+rxvt --geometry 100x1+300+300 +sb -fn 9x15 -bg black -fg grey -T Notes -e /bin/dash -c 'read -p &quot;Note: &quot; note &amp;&amp; echo &quot;&lt;p&gt;$note&lt;/p&gt;&quot; &gt;&gt; ~/.notes'
+</pre>
+<p>This will give you a very nice little pop up that lets you type in a
+note, press enter, and done. Remember that you need to have both rxvt
+and dash installed. Try it out and then open your home page in Firefox.
+You should be very pleased with the result. If you don't think it's
+pretty - then change the style tags to whatever you want.</p>
+<p>That's great. How often you actually open your home page could change
+this though. If you're like me, it's very rare. I do open a lot of new
+tabs though. There is an addon called <a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/777/">New Tab Homepage</a> that does a
+very simple task. When you open a new tab, it loads your home page. I'm
+very surprised this isn't an option built into Firefox. Ctrl+T and you
+see your notes.</p>
+<p>There you have it. An in-your-face and drop-dead-easy but also
+super-fast-and-light way to keep you on top of what you need to do. I
+haven't tried this out for too long so we'll se how it stands up in the
+long run.</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/kiss.html">kiss</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

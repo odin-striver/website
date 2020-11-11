@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Another typical Packt book review" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Nginx Book Review - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="nginx, reviews" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/nginx/rss.xml">Nginx (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/nginx/nginx-book-review" title="Permalink «Nginx Book Review»">Nginx Book Review</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2010-08-26T15:42:00-05:00">Thu 26 August 2010</time>
+            in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/nginx.html">nginx</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/reviews.html">reviews</a>-->        </div>
+      </header>
+        <p>Most anyone reading this already knows me. My name is Michael Lustfield.
+I'm running the servers of a starting web development company called
+Kalliki Software. We've been in business for a little while now. When we
+started we had an Apache Web server with less than one half a gigabyte
+of RAM. After three websites we were feeling the burn. The Apache web
+server was taking us down. We didn't have the resources to grow out. We
+needed to grow up. I turned to the two leaders, Nginx and Lighttpd.
+After investigating each I easily settled on Nginx. We were then able to
+handle upward of 10 websites on that exact same configuration. The
+change was amazing. After all of my experiences, I absolutely would not
+recommend Apache for anything.. ever.</p>
+<p>I was asked to review a book called &quot;<a class="reference external" href="http://www.packtpub.com/nginx-http-server-for-web-applications/book?utm_source=profarius.com&amp;utm_medium=link&amp;utm_content=blog&amp;utm_campaign=mdb_004258">Nginx HTTP Server</a>&quot; by Clément
+Nedelcu. It's been published by Packt Publishing.</p>
+<p>At the point of being asked to review this book, I'd moved into
+customized packages of Nginx for distribution which include bug fixes
+and feature additions. I'd also become the second administrator of the
+Nginx wiki. I also provide support online.</p>
+<p>Prior to this review, I'd read books by Packt Publishing but never
+actually considered much about the publisher. After reviewing them I
+realized that they focus on producing books about open source. More
+specifically, they produce books authored by the FOSS community. The
+book I as asked to review was about the Nginx HTTP Server. Nginx is, as
+the title states, an HTTP server. This is similar in nature to Apache.
+The difference is that Nginx is build for high efficiency. This book was
+meant to help users into its use.</p>
+<p>This book is obviously written for someone with no administrative
+experience. In fact, it starts out the first couple chapters discussing
+remote administration and command line basics. It also covered the
+installation and configuration of nginx, nginx modules, and php/python
+processes. This book was basically written in a way that it could guide
+a Windows 95 user into configuring and setting up a high performance web
+server with Nginx.</p>
+<p>The language of the book was of particular interest. The author is very
+obviously not a native English speaker but was still able to clearly and
+accurately explain everything. It boiled down to a lot of grammar
+mistakes which can easily be ignored by someone less pedantic that
+myself.</p>
+<p>The book itself covered many features. Some were funny to know existed
+and others were extremely useful. The best part is that you can easily
+make the binary of Nginx completely exclude these features which many
+will never use. The book very clearly explained this process in the
+second chapter.</p>
+<p>From a more experienced standpoint, I found many issues in the book. The
+minor suggesting “apt-get install build-essential” for dependency
+resolving of custom builds. I also noticed that the author suggested
+compiling things on a system rather than installing from a repository.
+From the point of support, this is bad. The book was written for
+beginners and compiling a package is not a beginner task.</p>
+<p>The author suggested that not being able to read &quot;.htaccess&quot; files was a
+bad thing but in reality this is an amazing performance gain by Nginx.
+The author also suggested using an if statement in many places.
+Unfortunately, an if is a horrible thing to use. 99.9% of the time there
+is a much better way to handle it.</p>
+<p>The author also had poor examples of using root and index directives.
+Any directive should be placed as high as possible in the block
+hierarchy. This prevents a lot of duplication. For example, if every
+website has the same indexes, then put the line in the http block once
+and nowhere else. This is minor for smaller websites but causes issues
+later.</p>
+<p>Almost any issues I found in this book I have already outlined in a
+<a class="reference external" href="http://wiki.nginx.org/Pitfalls">Pitfalls</a> page on the <a class="reference external" href="http://wiki.nginx.org/">Nginx Wiki</a>. If you follow that after reading
+the book, you'll be miles and miles ahead of most online guides.</p>
+<p>I do with the book had better line wrapping as some thing got confusing
+to understand. This is especially true when a directive is split onto
+two lines. I hope that knowing this in advance would enable a user to
+avoid any confusion.</p>
+<p>Aside from the issues I've mentioned I actually found that the book was
+very good. It could take nearly anyone with any technical skill and make
+them understand how Nginx works and what it does. This is extremely
+important. Understanding how Nginx works is even more important than the
+style issues described above. As I said, a <a class="reference external" href="http://wiki.nginx.org/Pitfalls">Pitfalls</a> wiki page prior
+to even reading this because the mistakes are scattered across the whole
+Internet.</p>
+<p>If you want to ditch Apache or IIS but are entirely confused about
+anything else, this book will give you an amazing boost in the right
+direction.</p>
+<p>As for configurations for specific applications, there's also a Wiki
+page about that. Check out the <a class="reference external" href="http://wiki.nginx.org/NginxConfiguration#Applications">Applications</a> section of the Nginx Wiki
+to find configurations that will be nearly drop-in for whatever you want
+to run. It's a growing collection and includes applications such as
+Drupal, Wordpress, Mailman, Redmine, MediaWiki, etc.</p>
+<p>After reading the &quot;Nginx HTTP Server&quot; book and the Nginx Wiki, you
+should be able to do just about anything in Nginx. Except for writing
+your own modules which is only lightly touched in the Wiki.</p>
+<p>Packt Publishing has generously offered a <a class="reference external" href="https://www.packtpub.com/sites/default/files/0868-chapter-3-basic-nginx-configuration_1.pdf">Sample Chapter</a></p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/nginx.html">nginx</a> #<a href="https://michael.lustfield.net/tag/reviews.html">reviews</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="A basic irssi, screen, ssh setup" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Irssi Using Screen And SSH - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="irc, ssh" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/irssi-using-screen-and-ssh" title="Permalink «Irssi Using Screen And SSH»">Irssi Using Screen And SSH</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2008-12-30T19:14:00-06:00">Tue 30 December 2008</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/irc.html">irc</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/ssh.html">ssh</a>-->        </div>
+      </header>
+        <p>I know this concept sound simple. You SSH into a server and restore a
+screen session running irssi. However, I wouldn't be writing about it if
+I didn't have a way to make it more efficient.</p>
+<p>I'll explain the benefits as we go along.</p>
+<p>First we need to get you into your server. I suggest setting up a shared
+key between you and your server. There's plenty of guides out there
+about shared keys.</p>
+<pre class="literal-block">
+ssh server.com
+</pre>
+<p>Once in your server you need to install irssi and screen.</p>
+<p>sudo aptitude install irssi screen</p>
+<p>Set up irssi however you would do it if you were setting if set it up on
+your own system. After this you will need to grab some files I've
+uploaded.</p>
+<p>First make the directory structure</p>
+<pre class="literal-block">
+mkdir -p ~/.irssi/scripts/autorun
+</pre>
+<p>notify.pl is a modified version that pops up nice little message bubbles
+on your desktop. It can be downloaded using subversion from
+<a class="reference external" href="http://code.google.com/p/irssi-libnotify/source/checkout">http://code.google.com/p/irssi-libnotify/source/checkout</a> or directly
+from my site.</p>
+<p>awayproxy.pl handles hilights when you are away. It's very well
+commented and easy to follow.</p>
+<p>screen_away.pl handles your away status when you connect and disconnect
+from screen.</p>
+<pre class="literal-block">
+wget -O ~/.irssi/scripts/notify.pl http://michael.lustfield.net/files/uploads/notify.pl.txt
+wget -O ~/.irssi/scripts/awayproxy.pl http://scripts.irssi.org/scripts/awayproxy.pl
+wget -O ~/.irssi/scripts/screen_away.pl http://scripts.irssi.org/scripts/screen_away.pl
+</pre>
+<p>We'll make symbolic links to make these run on irssi startup.</p>
+<pre class="literal-block">
+cd ~/.irssi/scripts/autorun
+ln -s ../notify.pl
+ln -s ../awayproxy.pl
+ln -s ../screen_away.pl
+</pre>
+<p>Now that you've setup everything on the server, it's time to start
+things on your client. This is pretty much just a single command that
+you can place in a menu item.</p>
+<pre class="literal-block">
+rxvt -bg black -fg green -sr -T irssi -n irssi -e ssh server.com -Xt screen -aAdr -RR irssi irssi
+</pre>
+<p>I use rxvt since it loads incredibly fast and is light weight.</p>
+<pre class="literal-block">
+rxvt - The terminal emulator I run
+-bg black - Makes the background black
+-fg green - Makes the text green
+-sr - Places the scrollbar on the right side
+-T irssi - Gives the window a title
+-n irssi - Gives the window a name
+-e - Everything after this is the command we're running in the terminal
+ssh - The command that we're running
+server.com - The server you're connecting to
+-Xt - Combined (order matters)
+-X - Enable X forwarding (for the notify.pl script)
+-t screen - The command we're running on the server after ssh connects
+-a - Include all capabilities possible in the session
+-A - Handles changing window sizes
+-dr - Reattach a session and if necessary detach it first
+-RR - Reattach a session and if necessary detach or create it
+irssi - The first occurance is the name we're giving this screen session
+irssi - The second occurance is the command we're running inside of screen
+</pre>
+<p>This is a VERY long command that we're running. Hopefully I explained
+all the parts correctly and efficiently enough that you can use and
+modify it to fit your exact needs.</p>
+<p>Attachments:</p>
+<p><img alt="image0" src="/files/icons/text-plain.png" /> <a class="reference external" href="/files/uploads/notify.pl">notify.pl</a></p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/irc.html">irc</a> #<a href="https://michael.lustfield.net/tag/ssh.html">ssh</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

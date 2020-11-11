@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Getting POP email pushed to a specific folder on an IMAP server" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Push POP to IMAP Folder - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="email" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/push-pop-to-imap-folder" title="Permalink «Push POP to IMAP Folder»">Push POP to IMAP Folder</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2008-12-30T19:10:00-06:00">Tue 30 December 2008</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/email.html">email</a>-->        </div>
+      </header>
+        <p>This is for anybody with multiple email accounts that wants to
+consolidate. My solution here requires and number of POP email accounts
+and one IMAP account.</p>
+<p>I don't even want to begin thinking about the time it took me to come up
+with this solution. Hopefully it can save somebody 10 or more hours of
+digging and scripting.</p>
+<p>My method works like this.</p>
+<ol class="arabic simple">
+<li>Synchronize IMAP account with local Maildir copy</li>
+<li>Download POP emails</li>
+<li>Push emails to Maildir local copy</li>
+<li>Synchronize local Maildir copy with IMAP account</li>
+</ol>
+<p>The first synchronization is to prevent any little issues that could pop
+up.</p>
+<p>First and foremost, I assume you are working on a Linux system. No
+exceptions. I also assume a system that uses Apt.</p>
+<p>You'll need to install a couple tools that are most likely not installed
+by default.</p>
+<p>sudo aptitude install getmail4 procmail offlineimap</p>
+<p>I did my best to keep everything in a nice central directory which you
+need to create as well.</p>
+<pre class="literal-block">
+mkdir ~/.synmail
+</pre>
+<p>The first thing we need to do is create a file in here called pushmail.
+Rather than showing you all the text, you can just download this script.
+It's attached as pushmail at the bottom of this post. Download it to
+~/.synmail/pushmail You will need to make sure it's executable as well.
+Just a note, make sure there is no period on the end.</p>
+<pre class="literal-block">
+chmod +x ~/.synmail/pushmail
+</pre>
+<p>The first file our pushmail script will use is for offlineimap. In order
+for this application to work, we need to create our very own IMAP
+directory.</p>
+<pre class="literal-block">
+mkdir ~/.synmail/imap
+</pre>
+<p>Now we need to create the offlineimap configuration file.</p>
+<pre class="literal-block">
+vim ~/.synmail/offlineimap.conf
+</pre>
+<p>Rather than go through all the details of setting this up, I just
+uploaded my copy. It is listed as offlineimap.conf. There isn't puch
+point in discussing all the various options because there is an
+excellent fully commented explation of everything sitting on your
+computer. Just follow these commands to get the copy.</p>
+<pre class="literal-block">
+cp /usr/share/doc/offlineimap/examples/offlineimap.conf.gz ~/
+gunzip ~/offlineimap.conf.gz
+</pre>
+<p>The next file our pushmail script needs is the getmail file. Our script
+expects this file in a very specific way. It's basically just
+prefix-getm. I have two gmail accounts so I use gm1-getm and gm2-getm. I
+uploaded a copy of my gm1-getm file. The values should make sense. If
+they don't you shouldn't be reading this. This file goes to
+~/.synmail/gm1-getm</p>
+<p>The only line that might be confusing is the arguments line. The reason
+we have the &quot; &quot; added in is because of the way parameters are passed to
+procmail. This caused me a lot of headaches and you're probably better
+off leaving it alone. The next part is the path to your procmail
+configuration.</p>
+<p>Now that we're on that page, it's time to talk about our procmail
+configuration. This file will have the same prefix as the one before it.
+I obviously called mine gm1-proc. Go figure, I uploaded my copy. Not
+only that, but I didn't have to hide passwords or anything. That's
+because this file is ONLY a delivery agent.</p>
+<p>When you look at this file, notice that there is a line called DEFAULT.
+This line is the reason we need different configurations for each
+account. That &quot;FODLER&quot; part at the end is what folder our files will be
+going into. Unfortunately, we can't leave it at that. Because of the way
+Maildir works, we need to add the /new at the end. I'm not saying
+Maildir sucks, and it really doesn't make this any harder.</p>
+<p>I probably don't need to note that you need to save this file just like
+the getmail configuration. Mine is at ~/.synmail/gm1-proc.</p>
+<p>Hurray, we now should have everything in place that we need to in order
+to run this setup successfully. You've probably noticed that our
+passwords show up a couple times. I don't like it either. We can have a
+password input file and a few other methods to keep things secure, but
+none of it is really worth it. Instead, I just like to make it readable
+and writable to only my user. Not only do I suggest it, it's in the
+script you got from me.</p>
+<p>Keep It Private:</p>
+<pre class="literal-block">
+chmod +x 0700 $HOME/.synmail
+</pre>
+<p>Now that we have that cleared up, it's time to test this puppy out. I
+have been using the prefix gm1, replace gm1 with whatever you have been
+using.</p>
+<pre class="literal-block">
+cd $HOME/.synmail/
+./pushmail gm1
+</pre>
+<p>The rest will be done for you. What happens is that the script takes
+your prefix input and uses this to find the other configuration files
+you created. This is why you need to keep the prefix the same, and
+follow my naming convention. If you don't like it, then the script is
+yours, do with it whatever you want. I love open source.</p>
+<p>When you're running this script, you will notice that it probably takes
+an insanely long time to go through. You might say to yourself that
+there's no way this is acceptable if it's going to happen every time.
+However, after the first run you'll realize that in fact it was just
+pulling down every single email you had on your IMAP server. If you look
+at it closely enough, you'll find that there's more files around than
+what you expected would be there.</p>
+<p>So, you'll see offlineimap making a copy of the current state of your
+IMAP data. Then you'll see getmail retrieving your POP emails. procmail
+will be running behind the scenes to sort your mail. And then you'll see
+offlineimap doing it's last sync with your newer emails going out to
+your server.</p>
+<p>BONUS: You can also use this local copy of your IMAP data if your IMAP
+server is ever offline or you won't have internet access. I would
+suggest being careful with it because of the nature of these scripts.</p>
+<p>That's the primary intention of offlineimap in the first place.</p>
+<p>BONUS 2: I've modified the pushmail script to be able to do ALL files in
+the directory in one shot. PLEASE DO NOT run this before you've verified
+ALL of your other settings work. Don't leave any extra -getm or -proc
+files. If you looks at the script, it'll be obvious why.</p>
+<p>Attachments:</p>
+<p><img alt="image0" src="/files/icons/application-octet-stream.png" /> <a class="reference external" href="/files/uploads/pushmail">pushmail</a></p>
+<p><img alt="image0" src="/files/icons/application-octet-stream.png" /> <a class="reference external" href="/files/uploads/pushmail-all">pushmail-all</a></p>
+<p><img alt="image0" src="/files/icons/application-octet-stream.png" /> <a class="reference external" href="/files/uploads/offlineimap.conf">offlineimap.conf</a></p>
+<p><img alt="image0" src="/files/icons/application-octet-stream.png" /> <a class="reference external" href="/files/uploads/gm1-getm">gm1-getm</a></p>
+<p><img alt="image0" src="/files/icons/application-octet-stream.png" /> <a class="reference external" href="/files/uploads/gm1-proc">gm1-proc</a></p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/email.html">email</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

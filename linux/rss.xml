@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Michael Lustfield - linux</title><link>https://michael.lustfield.net/</link><description></description><lastBuildDate>Wed, 03 Jul 2019 00:00:00 -0500</lastBuildDate><item><title>Fully Encrypted Disk</title><link>https://michael.lustfield.net/linux/fully-encrypted-disk</link><description>&lt;p&gt;An intelligent mind once said, &amp;quot;if I can touch your system, then it's not your
+system.&amp;quot; This phrase shaped the way I approached security, and increased my
+paranoia.&lt;/p&gt;
+&lt;p&gt;Although many guides exist that describe full disk encryption, they
+unfortunately fall a bit short of the claim and leave a bit …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 03 Jul 2019 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2019-07-03:/linux/fully-encrypted-disk</guid><category>linux</category><category>linux</category><category>file systems</category><category>security</category></item><item><title>Secure Password Vault Using Yubikey</title><link>https://michael.lustfield.net/linux/secure-password-vault-using-yubikey</link><description>&lt;p&gt;Up until recently, my passwords were stored in a rather precarious manner. For
+my birthday, I decided it would be a nice gift to myself to perform a complete
+password refresh. This involved taking inventory of every password there was
+any record or memory of and resetting it to unique …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 14 Feb 2017 00:00:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2017-02-14:/linux/secure-password-vault-using-yubikey</guid><category>linux</category><category>linux</category><category>security</category></item><item><title>Long Term Secure Backups</title><link>https://michael.lustfield.net/linux/long-term-secure-backups</link><description>&lt;p&gt;Not that long ago, I managed to delete all of my physical HV hosts, backup
+server, all external backups, and a bit more. The first question that most
+people would ask would probably be how that's even possible. That may become
+a post by itself; it probably won't, though. What …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 28 May 2016 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2016-05-28:/linux/long-term-secure-backups</guid><category>linux</category><category>infrastructure</category><category>backups</category><category>linux</category><category>security</category></item><item><title>What You Need To Do After Installing Ubuntu 10.10</title><link>https://michael.lustfield.net/linux/what-you-need-to-do-after-installing-ubuntu-1010</link><description>&lt;p&gt;Every six months these articles become popular. I've been using Ubuntu
+10.10 (Maverick Meerkat) for a few months now and I thought I'd share
+what I thought.&lt;/p&gt;
+&lt;div class="section" id="for-most-users"&gt;
+&lt;h2&gt;For most users&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Step 1:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Install Ubuntu 10.10&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Step 2:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Install the little extras you might want, such as Thunderbird, Galeon …&lt;/p&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 03 Oct 2010 02:32:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-10-03:/linux/what-you-need-to-do-after-installing-ubuntu-1010</guid><category>linux</category><category>linux</category><category>overkill</category></item><item><title>Useful F1 in Firefox</title><link>https://michael.lustfield.net/linux/useful-f1-in-firefox</link><description>&lt;p&gt;Do you ever use F1 to bring up help pages in Firefox? Do you find this
+feature useful? Do you like rhetorical questions?&lt;/p&gt;
+&lt;p&gt;Personally, I've never found this F1 function useful or helpful. The
+times I wanted some help from it I wasn't able to get the help I needed …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 13 Sep 2010 18:26:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-09-13:/linux/useful-f1-in-firefox</guid><category>linux</category><category>tips</category></item><item><title>Persistent SSH</title><link>https://michael.lustfield.net/linux/persistent-ssh</link><description>&lt;p&gt;It's time for another post. Recently I've had issues with dropping
+network connections or wanting to connect and keep working on the same
+thing from other systems. Most of you probably already know the answer.
+You screen.&lt;/p&gt;
+&lt;p&gt;Sounds easy enough. My issue is that I'm incredibly lazy. I don't want …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 11 Aug 2010 22:19:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-08-11:/linux/persistent-ssh</guid><category>linux</category><category>ssh</category></item><item><title>Light Weight Firefox Notes</title><link>https://michael.lustfield.net/linux/light-weight-firefox-notes</link><description>&lt;p&gt;Lately I've been cumulating a very large list of things I need to do.
+It's been getting harder and harder to keep track of what I need to do.
+If I make a nice simple text file and a command to open up vim with my
+notes then I wind …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 17 Jul 2010 22:55:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-07-17:/linux/light-weight-firefox-notes</guid><category>linux</category><category>kiss</category></item><item><title>SSH Tab Complete</title><link>https://michael.lustfield.net/linux/ssh-tab-complete</link><description>&lt;p&gt;I manage many servers as well as pop into a few other systems now and
+then. I was getting somewhat irritated with typing out everything. A
+search on Google showed many results. It seemed the most common command
+to do this was this.&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+complete -W &amp;quot;$(echo `cat ~/.ssh/known_hosts | cut …&lt;/pre&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 05 Dec 2009 21:12:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-12-05:/linux/ssh-tab-complete</guid><category>linux</category><category>ssh</category></item><item><title>Light Weight Ubuntu Kernel</title><link>https://michael.lustfield.net/linux/light-weight-ubuntu-kernel</link><description>&lt;p&gt;As a preliminary note: DO NOT follow anything in this and proceed to ask
+for help. If you follow this than consider yourself void of ANY support.
+Especially from the -kernel channel. They support and develop stock
+kernels, not your personal modifications.&lt;/p&gt;
+&lt;p&gt;Now.. In my quest for a fast boot …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Fri, 04 Dec 2009 17:36:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-12-04:/linux/light-weight-ubuntu-kernel</guid><category>linux</category><category>kiss</category><category>overkill</category></item><item><title>Creating Your Own Bazaar Server</title><link>https://michael.lustfield.net/linux/creating-your-own-bazaar-server</link><description>&lt;p&gt;By now we've all heard about the Bazaar (bzr) version control system. If
+you're a coder then you're well aware of what a version control system
+is and why it's helpful. If you code on Launchpad you're equally aware
+how incredibly awesome this system is.&lt;/p&gt;
+&lt;p&gt;Rather than discuss how incredible …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 31 Oct 2009 23:02:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-10-31:/linux/creating-your-own-bazaar-server</guid><category>linux</category><category>bazaar</category><category>vcs</category></item><item><title>64bit Java / Flash Deathroll</title><link>https://michael.lustfield.net/linux/64bit-java-flash-deathroll</link><description>&lt;p&gt;I think Linux users can safely agree that Flash and Java make web usage into a
+battle ground. Many of us choose to blame the issue on the distribution we use.
+When we favor our distribution too much we'll point fingers at Sun or Adobe. If
+we use the FOSS …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Thu, 10 Sep 2009 16:43:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-09-10:/linux/64bit-java-flash-deathroll</guid><category>linux</category><category>java</category><category>flash</category></item><item><title>Moving from personal mail server to Gmail</title><link>https://michael.lustfield.net/linux/moving-from-personal-mail-server-to-gmail</link><description>&lt;p&gt;I was hosting my own email server for about a year. I enjoyed the fact
+that I had full and complete control over the entire mail server. I
+enjoyed being able to fine tune everything to fit my needs exactly. I
+was doing this for about 1.5 years.&lt;/p&gt;
+&lt;p&gt;Unfortunately …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 09 Jun 2009 12:07:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-06-09:/linux/moving-from-personal-mail-server-to-gmail</guid><category>linux</category><category>email</category></item><item><title>Upgrading to 9.04 and Ext4 Remotely</title><link>https://michael.lustfield.net/linux/upgrading-to-904-and-ext4-remotely</link><description>&lt;p&gt;WARNING! Do Not do this to your systems. This is for informational
+purposes only. Do this in a virtual machine only. If you do this outside
+of a virtual machine, your computer will blow up and you will die.
+You've been warned.&lt;/p&gt;
+&lt;p&gt;I did in fact do this over SSH …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 07 Apr 2009 19:05:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-04-07:/linux/upgrading-to-904-and-ext4-remotely</guid><category>linux</category><category>file systems</category></item><item><title>Irssi to SMS</title><link>https://michael.lustfield.net/linux/irssi-to-sms</link><description>&lt;p&gt;It's no longer a secret that when I'm not in an active irssi session and
+you hilight me, that I get a text message. By popular request, I'm
+writing up an explanation to it.&lt;/p&gt;
+&lt;p&gt;1. Get irssi. When you're using it, you'll want to have it in a screen
+session …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Mon, 02 Feb 2009 16:43:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2009-02-02:/linux/irssi-to-sms</guid><category>linux</category><category>irc</category></item><item><title>Irssi Using Screen And SSH</title><link>https://michael.lustfield.net/linux/irssi-using-screen-and-ssh</link><description>&lt;p&gt;I know this concept sound simple. You SSH into a server and restore a
+screen session running irssi. However, I wouldn't be writing about it if
+I didn't have a way to make it more efficient.&lt;/p&gt;
+&lt;p&gt;I'll explain the benefits as we go along.&lt;/p&gt;
+&lt;p&gt;First we need to get you …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:14:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/irssi-using-screen-and-ssh</guid><category>linux</category><category>irc</category><category>ssh</category></item><item><title>Irssi As A Proxy</title><link>https://michael.lustfield.net/linux/irssi-as-a-proxy</link><description>&lt;p&gt;Irssi has a fairly nice proxy feature. It's probably the best proxy I've
+ever used. Unfortunately, it has a few flaws and is very under
+documented.&lt;/p&gt;
+&lt;p&gt;I gave up on ever having a decent proxy and switched to the screen
+option but I still want to explain this feature so …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:13:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/irssi-as-a-proxy</guid><category>linux</category><category>irc</category></item><item><title>Perfect Irssi and OpenBox Integration</title><link>https://michael.lustfield.net/linux/perfect-irssi-and-openbox-integration</link><description>&lt;p&gt;I think I achieved nearly the perfect Irssi + OpenBox.&lt;/p&gt;
+&lt;p&gt;There's four steps to my setup. Configuring gnome-terminal, alltray,
+irssi, and an image.&lt;/p&gt;
+&lt;p&gt;First of all, we need to set up irssi. If your'e reading this, I'm
+guessing you've already done this. I use murf. You can find themes at
+&lt;a class="reference external" href="http://irssi.org/themes"&gt;http …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/perfect-irssi-and-openbox-integration</guid><category>linux</category><category>irc</category><category>openbox</category></item><item><title>Push POP to IMAP Folder</title><link>https://michael.lustfield.net/linux/push-pop-to-imap-folder</link><description>&lt;p&gt;This is for anybody with multiple email accounts that wants to
+consolidate. My solution here requires and number of POP email accounts
+and one IMAP account.&lt;/p&gt;
+&lt;p&gt;I don't even want to begin thinking about the time it took me to come up
+with this solution. Hopefully it can save somebody …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:10:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/push-pop-to-imap-folder</guid><category>linux</category><category>email</category></item><item><title>Power Friendly Memo Script</title><link>https://michael.lustfield.net/linux/power-friendly-memo-script</link><description>&lt;p&gt;I've been bragging recently about how many obstacles I've overcome with
+Linux as a whole. There's many things I've been doing to Ubuntu to make
+it extremely fast and flexible for my uses. I also happen to be one of
+those people that forgets absolutely everything.&lt;/p&gt;
+&lt;p&gt;I very frequently decide …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:08:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/linux/power-friendly-memo-script</guid><category>linux</category><category>kiss</category></item></channel></rss>

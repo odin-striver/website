@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Michael Lustfield - rambling</title><link>https://michael.lustfield.net/</link><description></description><lastBuildDate>Sun, 17 Mar 2019 00:00:00 -0500</lastBuildDate><item><title>Tips for Living with an Ostomy</title><link>https://michael.lustfield.net/rambling/tips-for-living-with-an-ostomy</link><description>&lt;p&gt;My experience with colorectal (adenocarcinoma, T3aN0M0 [Stage 2]) cancer officially
+began on the 9th of October in 2017. After 8 rounds of chemo and 27 rounds of
+radiation, I arrived at surgery. Unfortunately, I came out on the other side of
+surgery with a permanent colostomy. Learning to live with …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 17 Mar 2019 00:00:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2019-03-17:/rambling/tips-for-living-with-an-ostomy</guid><category>rambling</category><category>ostomy</category></item><item><title>Esoteric Programming</title><link>https://michael.lustfield.net/rambling/esoteric-programming</link><description>&lt;p&gt;How needlessly complicated can you make one thing?&lt;/p&gt;
+&lt;p&gt;From Wikipedia: &amp;quot;An esoteric programming language (sometimes shortened
+to esolang) is a programming language designed as a test of the
+boundaries of computer programming language design, as a proof of
+concept, or as a joke. There is usually no intention of the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sat, 30 Jul 2011 04:38:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2011-07-30:/rambling/esoteric-programming</guid><category>rambling</category><category>bash</category><category>programming</category><category>overkill</category></item><item><title>Mister Jones</title><link>https://michael.lustfield.net/rambling/mister-jones</link><description>&lt;p&gt;It's always great to have the latest and greatest gadget. That new
+netbook is so small and everyone else has it. The Droid does so many
+cool things, even SSH. I deserve to have all of this cool stuff.&lt;/p&gt;
+&lt;p&gt;I'm getting rather annoyed with this attitude. Sure, I really want …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Wed, 22 Dec 2010 06:24:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-12-22:/rambling/mister-jones</guid><category>rambling</category><category>money</category><category>rant</category></item><item><title>Patience</title><link>https://michael.lustfield.net/rambling/patience</link><description>&lt;p&gt;&amp;quot;See that no one repays another evil for evil.&amp;quot;&lt;/p&gt;
+&lt;p&gt;[ I Thessalonians 5:15 ]&lt;/p&gt;
+&lt;p&gt;This is so easy to understand. It just says that if someone does an evil
+act, don't react with yet more evil.&lt;/p&gt;
+&lt;p&gt;Let's break it down though. How often have you been angered in IRC, on
+the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 23 Nov 2010 08:36:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-11-23:/rambling/patience</guid><category>rambling</category><category>patience</category></item><item><title>Jack of all trades, master of none</title><link>https://michael.lustfield.net/rambling/jack-of-all-trades-master-of-none</link><description>&lt;p&gt;&amp;quot;Jack of all trades, master of none&amp;quot; is a figure of speech used in
+reference to a generalist: a person that is competent with many skills
+but is not outstanding in any particular one. (Wikipedia)&lt;/p&gt;
+&lt;p&gt;It's a very easy to become this. When I was 15 I got my first …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Sun, 18 Jul 2010 06:28:00 -0500</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-07-18:/rambling/jack-of-all-trades-master-of-none</guid><category>rambling</category><category>management</category><category>rant</category></item><item><title>I Use Linux; Get It Right</title><link>https://michael.lustfield.net/rambling/i-use-linux-get-it-right</link><description>&lt;p&gt;WOW! I didn't expect this to be such a popular post. Honestly, I
+recognise this as a rant both now and before posting. I'm impressed by
+the number of people that were able to take a rant and make something
+nice out of it.&lt;/p&gt;
+&lt;p&gt;== Begin Opening ==&lt;/p&gt;
+&lt;p&gt;I ventured onto the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 05 Jan 2010 18:19:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2010-01-05:/rambling/i-use-linux-get-it-right</guid><category>rambling</category><category>linux</category><category>gnu</category><category>open source</category><category>rant</category><category>overkill</category></item><item><title>Worthless Backups</title><link>https://michael.lustfield.net/rambling/worthless-backups</link><description>&lt;p&gt;How good are your backups?&lt;/p&gt;
+&lt;p&gt;I thought mine were pretty dang good. I found out otherwise. I had the
+following two lines running nightly for my backups.&lt;/p&gt;
+&lt;p&gt;# Make MySQL backup&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+mysqldump -u root -p &amp;quot;$(/.sql.pwd)&amp;quot; --all-databases | gzip &amp;gt; /var/mysqldump/mysql-$(date +%F).gz
+&lt;/pre&gt;
+&lt;p&gt;# Delete old copies&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+find /var/mysqldump …&lt;/pre&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">michael</dc:creator><pubDate>Tue, 30 Dec 2008 19:11:00 -0600</pubDate><guid isPermaLink="false">tag:michael.lustfield.net,2008-12-30:/rambling/worthless-backups</guid><category>rambling</category><category>mysql</category><category>backup</category><category>rant</category></item></channel></rss>

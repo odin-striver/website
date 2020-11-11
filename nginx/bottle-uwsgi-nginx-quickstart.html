@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="A basic setup with bottlepy and nginx" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Bottle + UWSGI + Nginx Quickstart - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="bottle, nginx, uwsgi, python" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/nginx/rss.xml">Nginx (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/nginx/bottle-uwsgi-nginx-quickstart" title="Permalink «Bottle + UWSGI + Nginx Quickstart»">Bottle + UWSGI + Nginx Quickstart</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2013-08-06T00:00:00-05:00">Tue 06 August 2013</time>
+            in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/bottle.html">bottle</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/nginx.html">nginx</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/uwsgi.html">uwsgi</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/python.html">python</a>-->        </div>
+      </header>
+        <p>Nginx is pretty sweet, that's a rather obvious statement from me. There are
+already many nginx forks and contributions back to the original. I also happen
+to have quite a spot in my heart for <a class="reference external" href="http://bottlepy.org/docs/dev/">Bottle</a>. In my eyes, it's a framework
+that pretty much lets you forget you're working with the web. You get to write
+your application as if the web didn't exist and then tack on the templating.</p>
+<p>Maybe it's not <em>that</em> easy, but it's worth checking out! I'm going to take you
+through the process of getting this amazing stack going. Let's get started!</p>
+<div class="section" id="installing-stuff">
+<h2>Installing Stuff</h2>
+<p>I'm going to be assuming the use of Debian. It's easy enough to adjust.</p>
+<pre class="literal-block">
+aptitude install uwsgi uwsgi-plugin-python python-bottle nginx
+</pre>
+</div>
+<div class="section" id="your-first-bottle-application">
+<h2>Your First Bottle Application</h2>
+<p>I tend to start with a basic structure:</p>
+<pre class="literal-block">
+/var/www/webapp/
+    plugins/
+        __init__.py
+    static/
+        css/
+        files/
+        images/
+        js/
+    views/
+        base.tpl
+        page.tpl
+    app.py
+</pre>
+<p>Whether I have anything in the directories or not, they exist. It's just how I
+make sure I keep things consistent across applications.</p>
+<p>A basic skeleton of app.py will look something like this:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">A basic bottle app skeleton</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">bottle</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">application</span> <span class="o">=</span> <span class="n">bottle</span><span class="o">.</span><span class="n">Bottle</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/static/&lt;filename:path&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">static</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Serve static files</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">bottle</span><span class="o">.</span><span class="n">static_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="s1">&#39;./static&#39;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_index</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    The front &quot;index&quot; page</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello&#39;</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/page/&lt;page_name&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_page</span><span class="p">(</span><span class="n">page_name</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Return a page that has been rendered using a template</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">template</span><span class="p">(</span><span class="s1">&#39;page&#39;</span><span class="p">,</span> <span class="n">page_name</span><span class="o">=</span><span class="n">page_name</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">StripPathMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Get that slash out of the request</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+        <span class="n">e</span><span class="p">[</span><span class="s1">&#39;PATH_INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s1">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">bottle</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">StripPathMiddleware</span><span class="p">(</span><span class="n">app</span><span class="p">),</span>
+        <span class="n">server</span><span class="o">=</span><span class="s1">&#39;python_server&#39;</span><span class="p">,</span>
+        <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">)</span>
+</pre></div>
+<p>I realize there's a bit going on here, but it's not a minimal skeleton. This
+shows you how to serve static content, a basic text only front page, and a
+templated page. While you're testing, you don't want that slash unless the main
+page is being requested. Browsers seem to like adding that. It's not an issue
+when we get to deployment because uwsgi will take car of that for you.</p>
+<p>Notice that bottle.run() only happens when you run app.py. It won't run when
+you launch it as an application with uwsgi. This chunk is also the only place
+that we call StripPathMiddleware. If you have no need for development, then you
+can remove the last two chunks of code.</p>
+<p>Try it out!:</p>
+<pre class="literal-block">
+python app.py
+</pre>
+<p>You'll see the application start running. Go to example.com:8080/. Neat, huh?</p>
+</div>
+<div class="section" id="the-templating-system">
+<h2>The Templating System</h2>
+<p>Bottle has a bunch of templating options. For now, we're only going to touch
+the most basic option.</p>
+<p>views/page.tpl:</p>
+<pre class="literal-block">
+You are visiting {{page_name}}!
+%rebase base
+</pre>
+<p>views/base.tpl:</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">dir</span><span class="o">=</span><span class="s">&quot;ltr&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>My Site!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;pagebody&quot;</span><span class="p">&gt;</span>
+            %include
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+<p>This is obviously <em>very</em> basic, but it will get you started. Check out the
+<a class="reference external" href="http://bottle.readthedocs.org/en/latest/">Bottle Docs</a> for more information. The templating options are endless!</p>
+<p>Now that you have this done, restart app.py and visit example.com:8080/page/foo.
+You should be seeing a rather blank looking page that says &quot;You are visiting
+foo&quot; with the title &quot;My Site!&quot;</p>
+</div>
+<div class="section" id="adding-uwsgi">
+<h2>Adding UWSGI</h2>
+<p>Now that we have a very basic bottle application, it's time to fit it into the
+stack. The built in web server that bottle offers is very slow. It's for
+development only. Don't ever expect to use it in production.</p>
+<pre class="literal-block">
+app = application = bottle.Bottle()
+</pre>
+<p>This little gem is more magic than you think. Don't forget it!</p>
+<p>The UWSGI configuration is pretty simple. See the <a class="reference external" href="http://projects.unbit.it/uwsgi">UWSGI Docs</a> for more
+details information.</p>
+<p>Edit /etc/uwsgi/apps-available/bottle.ini:</p>
+<div class="highlight"><pre><span></span><span class="k">[uwsgi]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/run/uwsgi/app/bottle/socket</span>
+<span class="na">chdir</span> <span class="o">=</span> <span class="s">/var/www/bottle</span>
+<span class="na">master</span> <span class="o">=</span> <span class="s">true</span>
+<span class="na">plugins</span> <span class="o">=</span> <span class="s">python</span>
+<span class="na">file</span> <span class="o">=</span> <span class="s">app.py</span>
+<span class="na">uid</span> <span class="o">=</span> <span class="s">www-data</span>
+<span class="na">gid</span> <span class="o">=</span> <span class="s">www-data</span>
+</pre></div>
+<p>Then add a symlink from apps-enabled:</p>
+<pre class="literal-block">
+ln -s /etc/uwsgi/apps-available/bottle.ini /etc/uwsgi/apps-enabled/bottle.ini
+</pre>
+<p>And restart the service:</p>
+<pre class="literal-block">
+service uwsgi restart
+</pre>
+<p>At this point you'll see a socket file created at /run/uwsgi-bottle.socket.
+That's great, but we need to actually make use of it.</p>
+</div>
+<div class="section" id="adding-nginx">
+<h2>Adding Nginx</h2>
+<p>I prefer using the conf.d/ directory for my configurations. You can do as you
+wish on your server.</p>
+<p>Edit /etc/nginx/conf.d/bottle.conf:</p>
+<div class="highlight"><pre><span></span><span class="k">upstream</span> <span class="s">_bottle</span> <span class="p">{</span>
+    <span class="kn">server</span> <span class="s">unix:/run/uwsgi/app/bottle/socket</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">deb.ngx.cc</span><span class="p">;</span>
+    <span class="kn">root</span> <span class="s">/var/www/bottle</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="s">@uwsgi</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="s">@uwsgi</span> <span class="p">{</span>
+        <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
+        <span class="kn">uwsgi_pass</span> <span class="s">_bottle</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+<p>In our bottle application, we defined a route for static content. However, it's
+better to have nignx serve this data so that we can avoid making python do any
+work. That's why we use try_files in the location block. You want that in your
+bottle application for development, but when we deploy, it won't actually get
+used.</p>
+<p>Then restart the service:</p>
+<pre class="literal-block">
+service nginx restart
+</pre>
+<p>You'll now be able to access your bottle application from the internet through
+nginx.</p>
+</div>
+<div class="section" id="final-thoughts">
+<h2>Final Thoughts</h2>
+<p>This was a very brief tutorial. It's meant only to get you jump started into
+having a usable bottle+uwsgi+nginx stack that you can expand on to fit your
+environment/needs. If you feel any parts need additional explanation, please
+let me know!</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/bottle.html">bottle</a> #<a href="https://michael.lustfield.net/tag/nginx.html">nginx</a> #<a href="https://michael.lustfield.net/tag/uwsgi.html">uwsgi</a> #<a href="https://michael.lustfield.net/tag/python.html">python</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

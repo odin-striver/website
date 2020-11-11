@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="A typical review of Packt books" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Book Review - Nginx Module Extension - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="nginx, packt, review" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li class="active"><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/nginx/rss.xml">Nginx (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/nginx/book-review-nginx-module-extension" title="Permalink «Book Review - Nginx Module Extension»">Book Review - Nginx Module Extension</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2014-03-14T00:00:00-05:00">Fri 14 March 2014</time>
+            in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/nginx.html">nginx</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/packt.html">packt</a>,               <a rel="tag" href="https://michael.lustfield.net/tag/review.html">review</a>-->        </div>
+      </header>
+        <p>I apparently do enough work with Nginx that people keep asking me to review
+things. In this case, Packt asked me to review another book called &quot;Nginx
+Module Extension.&quot; Well, a decent module development book doesn't exist, so
+I'm rather excited to dive in!</p>
+<div class="section" id="while-reading">
+<h2>While Reading</h2>
+<p>Instead of just a summary when I'm done, I want to also include my reactions
+while reading.</p>
+<div class="section" id="table-of-contents">
+<h3>Table of Contents</h3>
+<p>I hope I'm missing something, but it seems that the first 82 pages of this book
+are focused on teaching you the basics of Nginx. That doesn't leave much for
+discussing the actual module development. My assumption from the cover was that
+we finally had a book explaining module development. I guess another book that
+explains getting started would be okay.</p>
+</div>
+<div class="section" id="preface">
+<h3>Preface</h3>
+<p>The preface mentions that:</p>
+<blockquote>
+This book is for advanced users such as system administrators and developers
+who want to extend Nginx's functionality using its highly flexible add-on system.
+We look at the existing modules available and how to compile and install them,
+along with practical examples of how to configure them with focus on optimizing
+the configuration. It also goes beyond what is available off the shelf and teaches
+you how to write your own module, in case something is not available from the
+big Nginx open source community.</blockquote>
+<p>and:</p>
+<blockquote>
+This book is intended for advanced users, system administrators, and developers
+of Nginx modules.</blockquote>
+<p>Okay, so we actually can expect to dive into something. Maybe module development
+within Nginx is much easier than I assumed. That would be a nice surprise.</p>
+<p>I do enjoy that the progression of this book is from absolute basics to in depth
+and advanced usage.</p>
+</div>
+<div class="section" id="chapters-1-4">
+<h3>Chapters 1-4</h3>
+<p>The first chapter briefly goes over installing Nginx on every OS I've heard of
+it being installed on. Some of this was taken directly from the Nginx wiki which
+is an excellent source of information. It's a relatively simple and easy to
+follow chapter that gets through the basics.</p>
+<p>The second chapter discusses configuring the events and main modules.</p>
+<p>Chapter three explains configuration schematics and directives. It gets pretty
+thorough without being boring. For a beginner, the information provided here is
+very useful.</p>
+<p>Chapter four is the logical continuation of third party modules. This chapter
+takes a long time to explain the use of a small number of third party modules.
+The modules explained are useful and the explanation is thorough, but I would
+have preferred seeing an overview of finding modules, documentation, and usage.</p>
+<p>In the end, I'm calling these sections the basic intro to Nginx. That would be
+great if we weren't over half way through the book already.</p>
+</div>
+<div class="section" id="chapters-5">
+<h3>Chapters 5</h3>
+<p>This dives into the very basic structure of a module. It also references files
+within the Nginx source that provide further information about development.
+This chapter takes a pretty quick dive into development of modules and explains
+many different points of interaction between Nginx core and the module.</p>
+</div>
+<div class="section" id="chapter-6">
+<h3>Chapter 6</h3>
+<p>Nope, that's it. We're done. After chapter 5, we have the index followed by some
+advertising of more Nginx books by this publisher.</p>
+</div>
+</div>
+<div class="section" id="after-reading">
+<h2>After Reading</h2>
+<p>I enjoyed the basics of this book. It takes you through compiling and installing
+Nginx as well as getting it configured properly. It does a solid job of making
+you have a clue what's going on.</p>
+<p>Unfortunately, the actual module development, the title of the book, is very
+lacking. It's just a pile of details to get you started and then abruptly ends.</p>
+<p>If the author added some more chapters to bring the development part together
+and expand on initial concepts, this could have been an excellent book. If
+you're looking for a basic intro to Nginx book, skip chapter five and get this.
+If you want to dive into developing Nginx modules, this isn't the book for you.</p>
+</div>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/nginx">nginx</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/nginx.html">nginx</a> #<a href="https://michael.lustfield.net/tag/packt.html">packt</a> #<a href="https://michael.lustfield.net/tag/review.html">review</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>

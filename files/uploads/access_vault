@@ -1,0 +1,57 @@
+#!/bin/bash
+##
+# Script to unlock my password vault.
+# For this to work, the second yk key slot must be configured with
+# challenge-response/hmac-sha1. It's recommended to require input
+# to generate the derived key (after entering password).
+##
+#set -x
+
+[[ "$USER" ]] || USER='mteck'
+[[ "$HOME" ]] || HOME="/home/$USER"
+
+die() {
+	#printf '*** %s ***' "$*"
+	/usr/bin/zenity --info --text="$*"
+	exit 1
+}
+
+main() {
+	check_env
+	[[ -e '/dev/mapper/vault' ]] || unlock_vault
+	/bin/mountpoint -q "$HOME/.crypt/mnt/vault" || mount_vault
+	open_vault
+}
+
+check_env() {
+	# exercise for reader
+}
+
+unlock_vault() {
+	vault_pass="$(/usr/bin/zenity --password \
+		--title='vault key' \
+		--timeout=30)"
+	luks_pass="${vault_key:5}$(/usr/bin/ykchalresp -2 \
+		"$(sha256sum <<<"${vault_key:0:8}$salt${vault_key:$(($len - 5)):4}" | cut -d ' ' -f 1)")"
+	unset vault_pass
+	/usr/bin/printf '%s' "$luks_pass" | sudo /sbin/cryptsetup \
+		open "$HOME/.crypt/crypts/vault" \
+		--header "$HOME/.crypt/headers/vault" \
+		vault -d -
+	unset luks_pass
+	[[ -e '/dev/mapper/vault' ]] ||
+		die 'unable to unlock crypt'
+}
+
+mount_vault() {
+	sudo /bin/mount /dev/mapper/vault "$HOME/.crypt/mnt/vault" ||
+		die 'unable to mount volume'
+}
+
+open_vault() {
+	[[ "$(/usr/bin/pgrep -x 'keepassx')" ]] &&
+		die 'keepassx already running'
+	/usr/bin/keepassx "$HOME/.crypt/mnt/vault/.pass.kdbx" &
+}
+
+main

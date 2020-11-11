@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta name="description" content="Create quick little memos/notes" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;user-scalable=no;target-densitydpi=device-dpi">
+    <title>Power Friendly Memo Script - Michael Lustfield</title>
+    <link rel="stylesheet" type="text/css" href="https://michael.lustfield.net/theme/css/combined.css" />
+    <!--[if lt IE 9]><script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script><script src="https://michael.lustfield.net/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="shortcut icon" type="image/png" href="https://michael.lustfield.net/theme/img/favicon.ico" />
+    <link rel="alternate" type="application/atom+xml" title="Michael Lustfield - Atom Feed" href="https://michael.lustfield.net/" /> 
+    <link rel ="alternate" type="application/rss+xml" title="Michael Lustfield - RSS Feed" href="https://michael.lustfield.net/rss.xml" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com/">
+
+    <meta name="author"   content="michael" />
+    <meta name="keywords" content="kiss" />
+  </head>
+  <body>
+    <div id="page">
+      
+      <div id="page-head">
+        <a class="site-heading" href="https://michael.lustfield.net/">Michael Lustfield</a>
+      </div>
+     
+      <div id="page-body" class="grid-container grid-parent">
+      <div id="page-side" class="grid-15 tablet-grid-15 mobile-grid-100">          <ul id="nav-table">
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Pages</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net">Home</a></li>
+              <!--<li><a href="https://michael.lustfield.net/categories">Categories</a></li>-->
+              <!--<li><a href="https://michael.lustfield.net/archives">Archives</a></li>-->
+              <li><a href="https://michael.lustfield.net/tags">Tags</a></li>
+              <li><a href="https://michael.lustfield.net/pages/about-me">About Me</a></li>
+              <li><a href="https://michael.lustfield.net/pages/contact-me">Contact Me</a></li>
+            </ul>
+          </nav>
+        </li>
+
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Categories</h3>
+            <ul>
+              <li class="active"><a href="https://michael.lustfield.net/category/linux">Linux</a></li>
+              <li><a href="https://michael.lustfield.net/category/misc">Misc</a></li>
+              <li><a href="https://michael.lustfield.net/category/nginx">Nginx</a></li>
+              <li><a href="https://michael.lustfield.net/category/rambling">Rambling</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Feeds</h3>
+            <ul>
+              <li><a href="https://michael.lustfield.net/rss.xml">RSS Feed</a></li>
+              <li><a href="https://michael.lustfield.net/linux/rss.xml">Linux (rss)</a></li>
+            </ul>
+          </nav>
+          </li>
+          <li class="side-navigation-li">
+          <nav>
+            <h3>Search</h3>
+	    <form action="https://www.google.com/search" method="get" name="searchform" />
+              <input name="sitesearch" type="hidden" value="michael.lustfield.net" />
+              <input autocomplete="on" size="12" maxlength="120" name="q" required="required"  type="text" />
+              <input name="q" type="hidden" value="-tag -category -files" />
+	      <br /><button class="button" type="submit">Search</button>
+            </form>
+          </nav>
+          </li>
+          </ul></div> <!-- /#page-side -->
+        <div id="page-content" class="grid-80 tablet-grid-80 mobile-grid-100 right">
+        <article class="post" id="page-main" role="main">
+      
+     
+      <header class="post-header">
+        <h1><a rel="bookmark" href="https://michael.lustfield.net/linux/power-friendly-memo-script" title="Permalink «Power Friendly Memo Script»">Power Friendly Memo Script</a></h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+            <!--
+            On <time datetime="2008-12-30T19:08:00-06:00">Tue 30 December 2008</time>
+            in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            by <a href="https://michael.lustfield.net/author/michael.html">michael</a>              <br />Tags:              <a rel="tag" href="https://michael.lustfield.net/tag/kiss.html">kiss</a>-->        </div>
+      </header>
+        <p>I've been bragging recently about how many obstacles I've overcome with
+Linux as a whole. There's many things I've been doing to Ubuntu to make
+it extremely fast and flexible for my uses. I also happen to be one of
+those people that forgets absolutely everything.</p>
+<p>I very frequently decide I'm going to do something later that isn't
+something big and forget about it, or forget about a homework
+assignment. I've tried using those note taking and memo apps. I found
+that tomboy was pretty good. Unfortunately, not good enough.</p>
+<p>I decided to go through and figure out a very simple way to take memos
+or quick little notes that wouldn't eat up any extra memory or waste any
+extra battery.</p>
+<p>The isn't a small app that you can download but it can be set up very
+easily. I don't know how to do key binding in anything other than
+OpenBox but I'm sure a few quick Google searches will answer things
+pretty quick. I'll try to do a search and list some of my finds. later
+on.</p>
+<p>First off, you'll need to make the script. I keep all of my scripts
+inside of ~/.bin/ unless I want them system usable, in which case I use
+/usr/local/sbin/ for most things.</p>
+<p>So, open up your favorite text editor and create ~/.bin/memo. Add the
+following text to this file.</p>
+<pre class="literal-block">
+#!/bin/bash
+echo &quot;Enter a short memo followed by Enter.&quot;
+read memo
+echo &quot;$memo&quot; &gt;&gt; ~/memo
+</pre>
+<p>I know it's short but also very efficient. Now you need to make the
+script executable. Do this with chmod +x ~/.bin/memo.</p>
+<p>Now we need to be able to call this script, otherwise it's not very
+useful to us. You can either call it from the terminal. If you have
+~/.bin in your PATH variable you can just call it by typing memo. You
+can add it to your path variable with PATH=&quot;$PATH:~/.bin&quot;.</p>
+<p>I prefer to call it using a hothey. I use Alt+F6. Not for any particular
+reason other that Alt+F2 and Alt+F4 are being used.</p>
+<p>Open up ~/.config/openbox/rc.xml. Please, don't attempt this if you
+don't have a very minimal understanding of XML.</p>
+<p>Find the tag. You will want to add a level directly below this. I
+actually put mine right above . Add the following text to the XML file.</p>
+<pre class="literal-block">
+xterm -T Memo -geometry 63x2+450+336 -e /bin/bash -l -c /home/michael/.bin/memo
+</pre>
+<p>Save the file and reload OpenBox. You should now be able to Press Alt+F6
+and have a box pop up in your screen that you can take a memo with. Type
+some text in and press enter. This text will be tagged to the end of
+~/memo.</p>
+<p>I personally have a --- UNSORTED --- line at the end of the file.
+Whenever I go into the file, I can take anything below that line and
+sort things out.</p>
+<p>The -geometry option for xterm can be kind of tricky to figure out. You
+will probably need to mess with it to fit your screen.</p>
+<pre class="literal-block">
+-geometry AxB+C+D . A=Width \| B=Height \| C=From Left \| D=From Top
+</pre>
+<p>Hope this can help you as much as it helped me.</p>
+
+        <footer class="post-footer">
+        <div class="meta">
+            Posted in «<a href="https://michael.lustfield.net/category/linux">linux</a>» 
+            <!--by <a href="https://michael.lustfield.net/author/michael.html">michael</a>--><br />
+            Tags:  #<a href="https://michael.lustfield.net/tag/kiss.html">kiss</a>        </div>
+      </footer>
+      
+      
+      </article> <!-- /#page-main -->
+</div>
+        
+      </div>  <!-- /#page-body -->
+
+      <div id="page-foot">
+        <p>MTecknology - <a href="/pages/keeping-it-dry">Keeping IT DRY</a><br />[<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">license</a>]</p>
+      </div>
+    </div> <!-- /#page -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=252297868"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '252297868');
+    </script>
+  </body>
+</html>
