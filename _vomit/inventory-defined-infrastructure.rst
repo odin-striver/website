@@ -3,12 +3,11 @@ The Inventory Driven Datacenter
 :date: 2017/09/17
 :tags: infrastructure, debian, networking, virtualization
 :desc: Inventory Defined Infrastructure -- A New Era For Information Technology
-
+:status: draft
 
 It's been interesting to observe the progression of technology over the past few
 years. We continue to increase what can be done with technology and we continue
-to decrease the barrier to entry. What's expected of IT professionals must grow
-in order to keep up with the demand.
+to decrease the barrier to entry.
 
 While many fads have come and gone, system automation isn't going anywhere. Most
 of us have reached a point where it's no longer possible to do our jobs without
