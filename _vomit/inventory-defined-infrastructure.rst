@@ -31,6 +31,16 @@ Disclaimer
 This post starts with basic beginnings but describes a new era of IT in which
 system administrators become highly skilled administrative workers.
 
+--------------------------------
+
+Issues
+------
+
+Cyclical Dependencies
+- Point at fresh deployment post
+Sooooo easy to over-engineer
+- tech debt
+
 
 My Beginnings
 -------------
